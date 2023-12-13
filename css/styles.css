@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .navbar {
-  width: 100vw; /* Adjust the width as needed */
+  width: calc(100vw - 280px);
 }
 
 .dropdown-toggle { outline: 0; }
