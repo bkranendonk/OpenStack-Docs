@@ -175,3 +175,5 @@ Step 14: Click on the small arrow next to the loadbalancer you just created and 
 Step 15: Choose a floating IP or select the net-float pool and click on **Associate**.  
   
 Step 16: Wait until the loadbalancer Operating Status is set to ONLINE. after which you can go to `http://<floating-ip>` in your webbrowser and see the loadbalancer in action.  
+
+If you want to customize your Loadbalancer even further we highly recommend you to read the [OpenStack Octavia Loadbalancer documentation](https://docs.openstack.org/octavia/latest/user/index.html)
