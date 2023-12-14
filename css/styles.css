@@ -58,3 +58,16 @@
 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
+
+
+code[class^="language-"] {
+  background-color: #282c34;
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 10px;
+  display: block;
+  overflow-x: auto;
+  white-space: pre;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
