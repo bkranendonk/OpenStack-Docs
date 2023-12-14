@@ -15,16 +15,16 @@ Before we start creating a loadbalancer, we need to setup an internal OpenStack 
 ### Creating an internal network
 First we need to create an internal network. In this tutorial, the network is named "webserver-network" but you can call it however you want.
 
-Step 1: Login to the OpenStack dashboard and go to the **Network** tab.
-Step 2: Click on **Networks** and then click on the **Create Network** button.
-Step 3: Fill in the following fields:
+Step 1: Login to the OpenStack dashboard and go to the **Network** tab.  
+Step 2: Click on **Networks** and then click on the **Create Network** button.  
+Step 3: Fill in the following fields:  
 * **Network Name**: webserver-network
 * **Enable Admin State**: Should be marked
 * **Create Subnet**: Should be marked
 * **Availability Zone Hists**: Leave empty for now
 * **MTU**: Leave empty for now
 
-Step 4: Click on subnet and fill in the following fields:
+Step 4: Click on subnet and fill in the following fields:  
 * **Subnet Name**: webserver-subnet
 * **Network Address Source**: Enter Network Address manually
 * **Network Address**: 10.0.0.0/24
@@ -33,7 +33,8 @@ Step 4: Click on subnet and fill in the following fields:
 * **Disable Gateway**: Should be unmarked
 
 Step 5: Click on Subnet Details and fill in the following fields:
-* **DHCP Enabled**: Should be marked
+* **DHCP Enabled**: Should be marked  
+
 All other fields can be left empty, click on **Create**.
 
 
@@ -62,9 +63,9 @@ Press **Add Interface**.
 ## Creating the webservers
 Now we can create the webservers. We will create 3 webservers for this tutorial. You can create as many as you want or skip this step if you already have webservers running.
 
-step 1: Go to the **Compute** tab and click on **Instances**.
-Step 2: Click on the **Launch Instance** button.
-Step 3: Fill in the following fields:
+step 1: Go to the **Compute** tab and click on **Instances**.  
+Step 2: Click on the **Launch Instance** button.  
+Step 3: Fill in the following fields:  
 * **Instance Name**: webserver
 * **Description**: Webserver for my cool website
 * **Availability Zone**: Leave empty or choose an availability zone to your liking
@@ -96,7 +97,7 @@ write_files:
       <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Hostname Page</title>
+          <title>Loadbalancer Tutorial</title>
           <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
       </head>
       <body>
