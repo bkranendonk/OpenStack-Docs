@@ -58,10 +58,3 @@
 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
-
-@media (max-width: 768px) {
-  .bg-dark {
-      width: 0;
-      overflow: hidden;
-  }
-}
