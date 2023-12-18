@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#sidebar {
+  height: auto; /* Sets the minimum height to 100% of the viewport height */
+}
+
 .navbar {
   width: calc(100vw - 280px);
 }
