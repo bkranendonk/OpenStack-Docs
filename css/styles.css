@@ -2,6 +2,7 @@
 
 #sidebar {
   height: auto; /* Sets the minimum height to 100% of the viewport height */
+  min-height: 100vh;
 }
 
 .navbar {
