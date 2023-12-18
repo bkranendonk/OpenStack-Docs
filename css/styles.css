@@ -5,8 +5,36 @@
   min-height: 100vh;
 }
 
-.navbar {
+#sidebar {
+  /* your existing styles */
+  transition: all 0.3s;
+}
+#sidebar.collapsed {
+  margin-left: -280px; /* Adjust width based on your sidebar's width */
+}
+
+#sidebar.opened {
+  margin-left: 0px;
+}
+
+.navbar-full {
+  width: 100vw;
+  transition: all 0.3s;
+}
+
+.navbar-with-sidebar {
   width: calc(100vw - 280px);
+  transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -280px;
+  }
+  
+  .navbar-with-sidebar{
+    width: 100vw;
+  }
 }
 
 .dropdown-toggle { outline: 0; }
@@ -63,3 +91,4 @@
 
 .fw-semibold { font-weight: 600; }
 .lh-tight { line-height: 1.25; }
+

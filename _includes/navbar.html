@@ -1,6 +1,15 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark navbar-with-sidebar">
     <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Toggle Sidebar Button -->
+        <button class="btn btn-primary" type="button" id="sidebarToggle">Toggle Sidebar</button>
+        
+        <!-- Hamburger Menu Button for Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible Content -->
+        <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="https://docs.openstack.org/2023.1/">OpenStack Documentation</a>
@@ -8,7 +17,7 @@
             </ul>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/feed.xml">RSS Feed</a>
+                    <a class="nav-link active" aria-current="page" href="/feed.xml">RSS</a>
                 </li>
             </ul>
         </div>
