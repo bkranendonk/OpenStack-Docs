@@ -1,6 +1,7 @@
 title: "OpenStack Cloud Tutorials"
 author: "CloudTutorials"
 description: "Step by Step OpenStack Tutorials"
+permalink: /articles/:title
 
 github_username: "CloudTutorials"
 rss: rss
