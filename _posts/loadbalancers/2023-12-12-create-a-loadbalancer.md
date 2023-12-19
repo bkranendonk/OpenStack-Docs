@@ -19,7 +19,7 @@ already set up, you can skip this initial configuration and proceed directly to 
 First we need to create an internal network. For this tutorial we will name it **webserver-network**.  
 However, feel free to assign a name of your choice to the network.
 
-[Create an internal network]({{ '/articles/create-an-loadbalancer' | relative_url }})
+[Create an internal network]({{ '/articles/create-an-internal-network' | relative_url }})
 
 
 ### Creating an router
