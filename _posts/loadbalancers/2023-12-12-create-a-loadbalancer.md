@@ -28,7 +28,61 @@ We will connect the network to a router and connect the router to the floating I
 For this tutorial, we'll set up three webservers. Feel free to adjust the number of webservers according  
 to your needs, or you can skip this section entirely if you already have webservers operational.  
 
+For this tutorial assumes three instances are created. you can use the following tutorial combined with the specs below:
+
 [Create instances]({{ '/articles/create-instances' | relative_url }})
+
+
+* **Instance Name**: webserver
+* **Description**: Webserver for my cool website
+* **Availability Zone**: Leave empty or choose an availability zone to your liking
+* **Instance Count**: 3
+
+* **Select Boot Source**: Image
+* **Create New Volume**: No
+* **Image Name**: Ubuntu 22.04 LTS
+
+* **Flavor** **Standard 1GB**  
+* **Networks** **webserver-network** 
+* **Security Groups** **allow-web**
+* **Configuration** tab. Paste the following code into the Customization Script field to update packages and install Apache2 on the webservers:  
+
+```cloud-config
+#cloud-config
+package_upgrade: true
+packages:
+  - apache2
+  - php
+  - libapache2-mod-php
+write_files:
+  - path: /var/www/html/index.php
+    content: |
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Loadbalancer Tutorial</title>
+          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      </head>
+      <body>
+          <div class="container mt-5">
+              <div class="card">
+                  <div class="card-header">
+                      Hostname Information
+                  </div>
+                  <div class="card-body">
+                      <h5 class="card-title">Server Hostname</h5>
+                      <p class="card-text"><?php echo gethostname(); ?></p>
+                  </div>
+              </div>
+          </div>
+      </body>
+      </html>
+runcmd:
+  - systemctl restart apache2
+
+```
 
 
 ---
