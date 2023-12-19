@@ -12,20 +12,20 @@ If needed, an OpenStack router can be created to allow for internet connectivity
 
 
 ### Creating an internal network
-First we need to create an internal network. For this tutorial we will name it **webserver-network**.  
+First we need to create an internal network. For this tutorial we will name it **internal-network**.  
 However, feel free to assign a name of your choice to the network.
 
 **Step 1**: Log in to the OpenStack dashboard and proceed to the **Network** tab.  
 **Step 2**: Select **Networks** and then click on the **Create Network** button.  
 **Step 3**: Enter the required details in the following fields:  
-* **Network Name**: webserver-network
+* **Network Name**: internal-network
 * **Enable Admin State**: Should be marked
 * **Create Subnet**: Should be marked
 * **Availability Zone Hists**: Leave empty for now
 * **MTU**: Leave empty for now
 
 **Step 4**: Click on subnet and fill in the following fields:  
-* **Subnet Name**: webserver-subnet
+* **Subnet Name**: internal-subnet
 * **Network Address Source**: Enter Network Address manually
 * **Network Address**: 10.0.0.0/24
 * **IP Version**: IPv4
@@ -38,13 +38,13 @@ However, feel free to assign a name of your choice to the network.
 Leave all other fields blank, then click on **Create**.  
 
 ### Creating a router
-We'll proceed to create an OpenStack router. In this tutorial, we'll name it **webserver-network-router**,  
-indicating its connection to the **webserver-network** network. However, feel free to name the router as per your preference.
+We'll proceed to create an OpenStack router. In this tutorial, we'll name it **internal-network-router**,  
+indicating its connection to the **internal-network** network. However, feel free to name the router as per your preference.
 
 **Step 1**: Navigate to the **Network** tab and select **Routers**.  
 **Step 2**: Initiate the router creation process by clicking on the **Create Router** button.  
 **Step 3**: Enter details in the following fields:  
-* **Router Name**: webserver-network-router
+* **Router Name**: internal-network-router
 * **Admin State**: Should be marked
 * **External Network**: Not required but recommended to set to floating IP network (Provides all instances in the network with internet connectivity)
 * **Availability Zone Hists**: Leave empty for now
@@ -54,6 +54,6 @@ Press **Create Router**.
 **Step 5**: Opt for the net-float pool and confirm by clicking on **Set Gateway**.  
 **Step 6**: Select the router you created and navigate to the **Interfaces** tab.  
 **Step 7**: Begin adding an interface by clicking on **Add Interface**. Enter the required information in the following fields:  
-* **Subnet**: webserver-netork (webserver-subnet)
+* **Subnet**: internal-network (internal-subnet)
 * **IP Address**: Leave empty for now
 Press **Add Interface**.
