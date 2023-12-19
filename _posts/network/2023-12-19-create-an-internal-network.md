@@ -57,5 +57,3 @@ Press **Create Router**.
 * **Subnet**: webserver-netork (webserver-subnet)
 * **IP Address**: Leave empty for now
 Press **Add Interface**.
-
----
