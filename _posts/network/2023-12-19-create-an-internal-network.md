@@ -4,16 +4,12 @@ tags: [Network]
 page_title: Create an internal network
 ---
 
-This tutorial guides you through the process of creating a load balancer with webservers functioning as backend servers.  
-If you have already configured a network, a router, and webservers, you have the option to skip ahead to the  **Creating the loadbalancer** section.  
-However, for a comprehensive understanding, we recommend reading through the entire tutorial.
+This tutorial guides you through the process of creating an internal network on. 
+An internal network can be used to connect instances together without internet connectivity. 
+If needed, an OpenStack router can be created to allow for internet connectivity and allow for associating floating IPs
 
 ---
 
-## Setting up an OpenStack network
-Before diving into the creation of a load balancer, it's essential to configure an internal OpenStack network.  
-This involves creating an internal network, an internal subnet, and an OpenStack router. If your network is  
-already set up, you can skip this initial configuration and proceed directly to the **Creating the webservers** section.
 
 ### Creating an internal network
 First we need to create an internal network. For this tutorial we will name it **webserver-network**.  
