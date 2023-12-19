@@ -41,7 +41,7 @@ However, feel free to assign a name of your choice to the network.
 
 Leave all other fields blank, then click on **Create**.  
 
-### Creating an router
+### Creating a router
 We'll proceed to create an OpenStack router. In this tutorial, we'll name it **webserver-network-router**,  
 indicating its connection to the **webserver-network** network. However, feel free to name the router as per your preference.
 
