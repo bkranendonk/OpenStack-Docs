@@ -21,23 +21,36 @@ page_title: <Page title>
 - The **tags** are used to filter the articles in the sidebar they should represent the category directory they are in.
 - The **page_title** is the title in the sidebar and the title at the top of the article.  
 
-
+Please note that all articles should be written in English.
 
 ## Styling of the article
 We use .md files for the articles the styling is done with markdown.
-You can find a good tutorial here: [Markdown Tutorial](https://guides.github.com/features/mastering-markdown/)
+You can find a good tutorial here: [Markdown Tutorial](https://guides.github.com/features/mastering-markdown/).
 
 ### Adding images
 To add images to the article you need to place the image in the assets/images folder.
 Please create a sub directory with the name of the article and place the images in there.
-Then you can add the image to the article with the following code:  
+Then you can add the image to the article with the following code:
 `![<Image description>](/assets/images/<article name>/<image name>)`
 
 # Review process
-After you have created the article you need to create a pull request. if you are not done editing yet you can create a draft pull request.
+After you have created the article you need to create a pull request. if you are not done editing yet you can create a draft pull request. Within the draft pull request you can ask for feedback.
 
-One of the community members will review the article and give you feedback where needed. if the article is good to go it will be merged into the main branch and will be published on the site.
+One of the approved community members will review the article and give you feedback where needed. if the article is good to go it will be merged into the main branch and will be published on the site.
+
+## Reviewing an article
+When reviewing an articles the following things should be checked:
+- Is the article in the correct category?
+- Is the article in the correct directory?
+- Is the article in the correct format?
+- Is the article in the correct language?
+- Is the article in the correct styling?
+- Is the article complete?
+- Is the article correct?
+
+If the article is not correct please give feedback to the author of the article in the pull request.
+If the article is correct please approve the pull request and merge it into the main branch.
 
 # Running the site locally
 To run the site locally for testing purposes you need to install jekyll.
-Please follow the instructions from [github](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll).
+Please follow the instructions from [github](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) on how to run to site locally.
