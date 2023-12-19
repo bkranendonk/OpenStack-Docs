@@ -50,7 +50,7 @@ indicating its connection to the **webserver-network** network. However, feel fr
 **Step 3**: Enter details in the following fields:  
 * **Router Name**: webserver-network-router
 * **Admin State**: Should be marked
-* **External Network**: Not required but recommended to set to floating IP network
+* **External Network**: Not required but recommended to set to floating IP network (Provides all instances in the network with internet connectivity)
 * **Availability Zone Hists**: Leave empty for now
 Press **Create Router**.
 
