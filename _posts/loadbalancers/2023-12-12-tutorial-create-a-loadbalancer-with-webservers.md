@@ -1,7 +1,7 @@
 ---
 layout: page
 tags: [Loadbalancers]
-page_title: Create a loadbalancer with webservers
+page_title: Tutorial - Create a loadbalancer with webservers
 ---
 
 This tutorial guides you through the process of creating a load balancer with webservers functioning as backend servers.  
@@ -20,6 +20,9 @@ First we need to create an internal network. For this tutorial we will name it *
 However, feel free to assign a name of your choice to the network. 
 We will connect the network to a router and connect the router to the floating IP network.
 
+In the article below you can find a step by step guide on how to create an internal network: please
+replace the name of the network with **webserver-network** and the name of the subnet with **webserver-subnet**.  
+
 [Create an internal network]({{ '/articles/create-an-internal-network' | relative_url }})
 
 ---
@@ -33,19 +36,28 @@ For this tutorial assumes three instances are created. you can use the following
 [Create instances]({{ '/articles/create-instances' | relative_url }})
 
 
+On the **Details** tab:  
 * **Instance Name**: webserver
 * **Description**: Webserver for my cool website
 * **Availability Zone**: Leave empty or choose an availability zone to your liking
 * **Instance Count**: 3
 
+On the **Source** tab:  
 * **Select Boot Source**: Image
 * **Create New Volume**: No
 * **Image Name**: Ubuntu 22.04 LTS
 
-* **Flavor** **Standard 1GB**  
-* **Networks** **webserver-network** 
-* **Security Groups** **allow-web**
-* **Configuration** tab. Paste the following code into the Customization Script field to update packages and install Apache2 on the webservers:  
+On the **Flavor** tab:  
+* **Flavor**: Standard 1GB
+
+On the **Networks** tab:  
+* **Network**: webserver-network
+
+On the **Security Groups** tab:  
+* **Security Group**: allow-web
+
+On the **Configuration** tab:  
+* Paste the following code into the **Customization Script** field to update packages and install Apache2 on the webservers:  
 
 ```cloud-config
 #cloud-config
@@ -90,7 +102,6 @@ runcmd:
 ## Creating the loadbalancer
 Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a healthmonitor.
 
-### Creating the loadbalancer
 **Step 1**: Navigate to the **Network** tab and select **Load Balancers**.  
 **Step 2**: Initiate the process by clicking on the **Create Load Balancer** button.  
 **Step 3**: Enter details in the following fields:  
