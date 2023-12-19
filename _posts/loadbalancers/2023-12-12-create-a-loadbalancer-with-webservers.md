@@ -1,7 +1,7 @@
 ---
 layout: page
 tags: [Loadbalancers]
-page_title: Tutorial - Create a loadbalancer with webservers
+page_title: Create a loadbalancer with webservers
 ---
 
 This tutorial guides you through the process of creating a load balancer with webservers functioning as backend servers.  
