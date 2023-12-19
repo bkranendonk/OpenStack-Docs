@@ -41,10 +41,10 @@ As a dedicated IPv4 range is an expensive resource, we need to share the network
 
 
 ### Delete the network
-- To delete the network, the network gateway needs to be disconnected first
-- Delete all ports connected to the network
-- This can be done by removing ports from instances, or by removing instances
-- Within Horizon, go to networks > network > "Your rented network" > subnets
-- Edit every subnet and select "Disable Gateway"
-- Within several seconds, but at most 5 minutes, your subnet will be disconnected 
-- Delete the subnets
+**Step 1**: To delete the network, the network gateway needs to be disconnected first
+* Delete all ports connected to the network
+* This can be done by removing ports from instances, or by removing instances
+**Step 2** Within Horizon, go to networks > network > "Your rented network" > subnets
+**Step 3** Edit every subnet and select "Disable Gateway"
+* Within several seconds, but at most 5 minutes, your subnet will be disconnected 
+**Step 4** Delete the subnets
