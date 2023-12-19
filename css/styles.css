@@ -105,5 +105,6 @@ code[class^="language-"] {
   overflow-x: auto;
   white-space: pre;
   border: 1px solid #ddd;
+  width: max-content;
   border-radius: 4px;
 }
