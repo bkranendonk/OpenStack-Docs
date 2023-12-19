@@ -1,6 +1,6 @@
 ---
 layout: page
-tags: [network]
+tags: [Network]
 page_title: Create an internal network
 ---
 
