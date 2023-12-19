@@ -1,7 +1,7 @@
 ---
 layout: page
 tags: [Loadbalancers]
-page_title: Create an loadbalancer with webservers
+page_title: Create a loadbalancer with webservers
 ---
 
 This tutorial guides you through the process of creating a load balancer with webservers functioning as backend servers.  
@@ -17,51 +17,13 @@ already set up, you can skip this initial configuration and proceed directly to 
 
 ### Creating an internal network
 First we need to create an internal network. For this tutorial we will name it **webserver-network**.  
-However, feel free to assign a name of your choice to the network.
+However, feel free to assign a name of your choice to the network. 
+We will connect the network to a router and connect the router to the floating IP network.
 
-**Step 1**: Log in to the OpenStack dashboard and proceed to the **Network** tab.  
-**Step 2**: Select **Networks** and then click on the **Create Network** button.  
-**Step 3**: Enter the required details in the following fields:  
-* **Network Name**: webserver-network
-* **Enable Admin State**: Should be marked
-* **Create Subnet**: Should be marked
-* **Availability Zone Hists**: Leave empty for now
-* **MTU**: Leave empty for now
+In the article below you can find a step by step guide on how to create an internal network: please
+replace the name of the network with **webserver-network** and the name of the subnet with **webserver-subnet**.  
 
-**Step 4**: Click on subnet and fill in the following fields:  
-* **Subnet Name**: webserver-subnet
-* **Network Address Source**: Enter Network Address manually
-* **Network Address**: 10.0.0.0/24
-* **IP Version**: IPv4
-* **Gateway IP**: 10.0.0.1
-* **Disable Gateway**: Should be unmarked
-
-**Step 5**: Navigate to Subnet Details and fill in the following information:  
-* **DHCP Enabled**: Ensure this option is marked.  
-
-Leave all other fields blank, then click on **Create**.  
-
-
-### Creating an router
-We'll proceed to create an OpenStack router. In this tutorial, we'll name it **webserver-network-router**,  
-indicating its connection to the **webserver-network** network. However, feel free to name the router as per your preference.
-
-**Step 1**: Navigate to the **Network** tab and select **Routers**.  
-**Step 2**: Initiate the router creation process by clicking on the **Create Router** button.  
-**Step 3**: Enter details in the following fields:  
-* **Router Name**: webserver-network-router
-* **Admin State**: Should be marked
-* **External Network**: Not required but recommended to set to floating IP network
-* **Availability Zone Hists**: Leave empty for now
-Press **Create Router**.
-
-**Step 4**: Locate the router you've just created and click on the small arrow next to it. From the dropdown menu, select **Set Gateway**.  
-**Step 5**: Opt for the net-float pool and confirm by clicking on **Set Gateway**.  
-**Step 6**: Select the router you created and navigate to the **Interfaces** tab.  
-**Step 7**: Begin adding an interface by clicking on **Add Interface**. Enter the required information in the following fields:  
-* **Subnet**: webserver-netork (webserver-subnet)
-* **IP Address**: Leave empty for now
-Press **Add Interface**.
+[Create an internal network]({{ '/articles/create-an-internal-network' | relative_url }})
 
 ---
 
@@ -69,24 +31,33 @@ Press **Add Interface**.
 For this tutorial, we'll set up three webservers. Feel free to adjust the number of webservers according  
 to your needs, or you can skip this section entirely if you already have webservers operational.  
 
-**Step 1**: Access the **Compute** tab and select **Instances**.  
-**Step 2**: Initiate instance creation by clicking on the **Launch Instance** button.  
-**Step 3**: Provide the required information in the following fields:  
+For this tutorial assumes three instances are created. you can use the following tutorial combined with the specs below:
+
+[Create instances]({{ '/articles/create-instances' | relative_url }})
+
+
+On the **Details** tab:  
 * **Instance Name**: webserver
 * **Description**: Webserver for my cool website
 * **Availability Zone**: Leave empty or choose an availability zone to your liking
 * **Instance Count**: 3
 
-**Step 4**: Navigate to the **Source** tab and enter the necessary information in the following fields:  
+On the **Source** tab:  
 * **Select Boot Source**: Image
 * **Create New Volume**: No
 * **Image Name**: Ubuntu 22.04 LTS
 
-**Step 5**: Choose a suitable flavor by clicking on the **Flavor** tab. For this tutorial, select the Standard 1 GB flavor.  
-**Step 6**: Select your network by clicking on the **Networks** tab. Choose the recently created **webserver-network**.  
-**Step 7**: Add necessary security by clicking on the **Security Groups** tab and selecting the **allow-web** security group.  
-**Step 8**: Assign a key pair by clicking on the **Key Pair** tab. Select a key pair of your preference, or create or upload one here if you don't have one.  
-**Step 9**: Configure your setup by clicking on the **Configuration** tab. Paste the provided code into the Customization Script field to update packages and install Apache2 on the webservers:  
+On the **Flavor** tab:  
+* **Flavor**: Standard 1GB
+
+On the **Networks** tab:  
+* **Network**: webserver-network
+
+On the **Security Groups** tab:  
+* **Security Group**: allow-web
+
+On the **Configuration** tab:  
+* Paste the following code into the **Customization Script** field to update packages and install Apache2 on the webservers:  
 
 ```cloud-config
 #cloud-config
@@ -125,12 +96,12 @@ runcmd:
 
 ```
 
+
 ---
 
 ## Creating the loadbalancer
 Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a healthmonitor.
 
-### Creating the loadbalancer
 **Step 1**: Navigate to the **Network** tab and select **Load Balancers**.  
 **Step 2**: Initiate the process by clicking on the **Create Load Balancer** button.  
 **Step 3**: Enter details in the following fields:  
