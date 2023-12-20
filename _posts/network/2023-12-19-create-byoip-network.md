@@ -22,13 +22,13 @@ As a dedicated IPv4 range is an expensive resource, we need to share the network
 * **Availability Zone Hints**: Leave empty for now
 * **MTU**: Leave empty for now
 
-**Step 4**: Click on subnet and fill in the following fields:  
+**Step 4**: Click on **Subnet** and fill in the following fields:  
 * **Subnet Name**: customer-public-subnet
 * **Network Address Source**: "Allocate Network Address from a pool"
 * **Address Pool**: select "byoip-ipv4"
 * **Network Mask** select an appropriate subnet, be aware, the larger the network, the more expensive it will be.
 
-**Step 5**: Navigate to Subnet Details and fill in the following information:  
+**Step 5**: Navigate to **Subnet Details** and fill in the following information:  
 * **DHCP Enabled**: Ensure this option is marked.  
 * **DNS Name Servers**: Configure DNS servers for DHCP to hand out.
 * Leave all other fields blank, then click on **Create**.  
