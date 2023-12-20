@@ -15,7 +15,7 @@ The tutorial does not include configuring the firewall and
 ### Requirements
 * A public IPv4 subnet where you can set allowed address pairs with at least three available IP addresses 
   * For example [Rent an IPv4 range]({{ '/articles/create-byoip-network' | relative_url }})
-* An internal network without a router and with at least three available IP addresses
+* An internal network without a router and with at least three available IP addresses (Named **routed** in this tutorial)
   * [Create an internal network]({{ '/articles/create-an-internal-network' | relative_url }})
 * A Firewall image in OpenStack (for example OPNsense AMD64 nano image from https://opnsense.org/download/)  
 
@@ -67,10 +67,11 @@ On the **Security Groups** tab:
 ### Disable port security for FW01 and FW02
 
 **Step 1** Go to compute > Instances > FW01 > Interfaces tab  
-**Step 2** Click on edit port for the WAN interface  
-**Step 3** Deselect "Port Security" and click update  
+**Step 2** Click on **Edit port** for the WAN interface  
+**Step 3** Deselect **Port Security** and click update  
 ![Edit port]({{ '/assets/images/2023-12-20-create-ha-firewall/edit_port.png' | relative_url }})  
 **Step 4** Do the same for the LAN interface  
+**Step 5** Do the same for FW02
 
 ### Configure the firewall instances 
 Install the firewall instances to your liking, but at least configure the following parameters
@@ -81,11 +82,11 @@ Install the firewall instances to your liking, but at least configure the follow
 
 ### Configure routing on the subnet
 
-* Go to network &gt; networks and navigate to network "routed"
-* Go to subnets and click "Edit subnet" for the subnet
-* Navigate to "Subnet Details"
+* Go to network &gt; networks and navigate to network **routed**
+* Go to subnets and click **Edit subnet** for the subnet
+* Navigate to **Subnet Details**
   * ![Configure host route]({{ '/assets/images/2023-12-20-create-ha-firewall/configure_host_route.png' | relative_url }})
-* Add a host route 0.0.0.0/0,10.10.50.254 and click "Save"
+* Add a host route **0.0.0.0/0,10.10.50.254** and click **Save**
 
 ### Validate the network
 
