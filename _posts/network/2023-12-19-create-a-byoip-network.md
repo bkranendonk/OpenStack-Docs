@@ -37,7 +37,7 @@ As a dedicated IPv4 range is an expensive resource, we need to share the network
 * On the background, the network will be fine-tuned and configured. this should be done within 5 minutes. If not, please contact support
 
 ### Dual-Stack IPv4 and IPv6
-- When both an IPv4 and IPv6 address pool is added, all instances will receive both an IPv4 and an IPv6 address.
+- When both an IPv4 and IPv6 address pools are added, an IPv4 and an IPv6 address will be allocated for each port created.
 
 
 ### Delete the network
