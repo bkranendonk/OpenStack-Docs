@@ -17,8 +17,7 @@ The tutorial does not include configuring the firewall and
 * An internal network without a router 
 
 ### Design
-![Design](/OpenStack-Docs/assets/images/2023-12-20-create-ha-firewall/ha_fw_design.png)
-![Design2]({{ '/assets/images/2023-12-20-create-ha-firewall/ha_fw_design.png' | relative_url }})
+![Design]({{ '/assets/images/2023-12-20-create-ha-firewall/ha_fw_design.png' | relative_url }})
 We have multiple firewall / router instances within the OpenStack project. 
 All routers have an internal IP, and an IP address on a BYoIP subnet. 
 Next to that, we have one virtual IP on the internal network and one virtual IP on the BYoIP network. 
