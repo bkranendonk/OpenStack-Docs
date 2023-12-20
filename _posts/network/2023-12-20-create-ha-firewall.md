@@ -29,7 +29,8 @@ The tutorial does not include configuring the firewall and
   The firewalls are configured in an active / standby configuration and through CARP or VRRP decide which instance is the master. 
 
 ### Modify subnet allocation pools
-Adjust the DHCP allocation pool to provide at least one IP addres for the Virtual IP of the firewall cluster (in this example 10.10.50.254)
+Adjust the DHCP allocation pool to provide at least one IP addres for the Virtual IP of the firewall cluster (in this example 10.10.50.254)  
+
 **Step 1**: Log in to the OpenStack dashboard and proceed to the **Network** tab.   
 **Step 2**: Select **Networks** and then select your internal network  
 **Step 3**: Select **Subnets** and click **Edit Subnet** on the subnet where your Virtual IP should live  
