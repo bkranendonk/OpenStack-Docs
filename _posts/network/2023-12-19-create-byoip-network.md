@@ -12,7 +12,6 @@ As a dedicated IPv4 range is an expensive resource, we need to share the network
 
 ### Create the network
 **Step 1** Ask support to share the BYoIP subnetpool to your project (provide them with your project ID)
-
 **Step 2**: Log in to the OpenStack dashboard and proceed to the **Network** tab.  
 **Step 3**: Select **Networks** and then click on the **Create Network** button.  
 **Step 4**: Enter the required details in the following fields:  
