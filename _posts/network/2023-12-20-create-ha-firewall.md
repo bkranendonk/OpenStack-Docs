@@ -22,6 +22,7 @@ The tutorial does not include configuring the firewall and
 
 ### Design
 ![Design]({{ '/assets/images/2023-12-20-create-ha-firewall/ha_fw_design.png' | relative_url }})  
+
   We have multiple firewall / router instances within the OpenStack project. 
   All routers have an internal IP, and an IP address on a BYoIP subnet. 
   Next to that, we have one virtual IP on the internal network and one virtual IP on the BYoIP network. 
@@ -29,11 +30,11 @@ The tutorial does not include configuring the firewall and
 
 ### Modify subnet allocation pools
 Adjust the DHCP allocation pool to provide at least one IP addres for the Virtual IP of the firewall cluster (in this example 10.10.50.254)
-**Step 1**: Log in to the OpenStack dashboard and proceed to the **Network** tab.  
-**Step 2**: Select **Networks** and then select your internal network
-**Step 3**: Select **Subnets** and click **Edit Subnet** on the subnet where your Virtual IP should live
-**Step 4**: Go to **Subnet Details** and modify the **Allocation Pools** to remove 10.10.50.254 from the allocation pool
-**Step 5**: Clikc **Save**
+**Step 1**: Log in to the OpenStack dashboard and proceed to the **Network** tab.   
+**Step 2**: Select **Networks** and then select your internal network  
+**Step 3**: Select **Subnets** and click **Edit Subnet** on the subnet where your Virtual IP should live  
+**Step 4**: Go to **Subnet Details** and modify the **Allocation Pools** to remove 10.10.50.254 from the allocation pool  
+**Step 5**: Clikc **Save**  
 
 Repeat the same process for the rented IP range
 
@@ -44,10 +45,10 @@ For this tutorial assumes two instances are created, both in a different availab
 
 
 On the **Details** tab:  
-* **Instance Name**: FW01 / FW02
-* **Description**: Firewall for internal network
-* **Availability Zone**: Choose an availability zone to your liking
-* **Instance Count**: 1
+* **Instance Name**: FW01 / FW02  
+* **Description**: Firewall for internal network  
+* **Availability Zone**: Choose an availability zone to your liking  
+* **Instance Count**: 1  
 
 On the **Source** tab:  
 * **Select Boot Source**: Image
@@ -65,11 +66,11 @@ On the **Security Groups** tab:
 
 ### Disable port security for FW01 and FW02
 
-**Step 1** Go to compute > Instances > FW01 > Interfaces tab
-**Step 2** Click on edit port for the WAN interface
-**Step 3** Deselect "Port Security" and click update
-![Edit port]({{ '/assets/images/2023-12-20-create-ha-firewall/edit_port.png' | relative_url }})
-**Step 4** Do the same for the LAN interface
+**Step 1** Go to compute > Instances > FW01 > Interfaces tab  
+**Step 2** Click on edit port for the WAN interface  
+**Step 3** Deselect "Port Security" and click update  
+![Edit port]({{ '/assets/images/2023-12-20-create-ha-firewall/edit_port.png' | relative_url }})  
+**Step 4** Do the same for the LAN interface  
 
 ### Configure the firewall instances 
 Install the firewall instances to your liking, but at least configure the following parameters
@@ -83,7 +84,7 @@ Install the firewall instances to your liking, but at least configure the follow
 * Go to network &gt; networks and navigate to network "routed"
 * Go to subnets and click "Edit subnet" for the subnet
 * Navigate to "Subnet Details"
-* ![Configure host route]({{ '/assets/images/2023-12-20-create-ha-firewall/configure_host_route.png' | relative_url }})
+  * ![Configure host route]({{ '/assets/images/2023-12-20-create-ha-firewall/configure_host_route.png' | relative_url }})
 * Add a host route 0.0.0.0/0,10.10.50.254 and click "Save"
 
 ### Validate the network
