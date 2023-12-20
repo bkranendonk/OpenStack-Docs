@@ -21,7 +21,7 @@ The tutorial does not include configuring the firewall and
 
 
 ### Design
-![Design]({{ '/assets/images/2023-12-20-create-ha-firewall/ha_fw_design.png' | relative_url }})
+![Design]({{ '/assets/images/2023-12-20-create-ha-firewall/ha_fw_design.png' | relative_url }})  
   We have multiple firewall / router instances within the OpenStack project. 
   All routers have an internal IP, and an IP address on a BYoIP subnet. 
   Next to that, we have one virtual IP on the internal network and one virtual IP on the BYoIP network. 
@@ -68,5 +68,24 @@ On the **Security Groups** tab:
 **Step 1** Go to compute > Instances > FW01 > Interfaces tab
 **Step 2** Click on edit port for the WAN interface
 **Step 3** Deselect "Port Security" and click update
-![Design]({{ '/assets/images/2023-12-20-create-ha-firewall/edit_port.png' | relative_url }})
+![Edit port]({{ '/assets/images/2023-12-20-create-ha-firewall/edit_port.png' | relative_url }})
 **Step 4** Do the same for the LAN interface
+
+### Configure the firewall instances 
+Install the firewall instances to your liking, but at least configure the following parameters
+* Configure the IPs (both the WAN and LAN subnet will provide have DHCP, but static configuration is also possible. please note it is advised to use the IPs provided by OpenStack) 
+* Configure a HA / virtual / vrrp / carp IP for IP 10.10.50.254 on the LAN interface 
+* Configure a HA / virtual / vrrp / carp IP on the WAN interface with the IP which was deducted from the rented IPv4 DHCP range earlier
+* Optionally: configure an outgoing NAT rule to translate outgoing traffic to come from the virtual IP
+
+### Configure routing on the subnet
+
+* Go to network &gt; networks and navigate to network "routed"
+* Go to subnets and click "Edit subnet" for the subnet
+* Navigate to "Subnet Details"
+* ![Configure host route]({{ '/assets/images/2023-12-20-create-ha-firewall/configure_host_route.png' | relative_url }})
+* Add a host route 0.0.0.0/0,10.10.50.254 and click "Save"
+
+### Validate the network
+
+Create a client instance and validate if internet connectivity is flowing through the firewall cluster.
