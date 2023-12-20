@@ -27,11 +27,29 @@ Please note that all articles should be written in English.
 We use .md files for the articles the styling is done with markdown.
 You can find a good tutorial here: [Markdown Tutorial](https://guides.github.com/features/mastering-markdown/).
 
+
+### Adding Hyperlinks
+#### Hyperlink to local page/article
+To add a hyperlink an article on the same site you need to use the following code, the relative_url filter is used
+to make sure the link is correct when the site is published both on the main site and on potential forks in the future:
+```markdown
+[<link-text>]({{ '<link-url>' | relative_url }})
+```
+
+#### Hyperlink to external page
+To add a hyperlink to an external page you need to use the following code, in this case the relative_url is not needed:
+```markdown
+[<link-text>](<link-url>)
+```
+
+
 ### Adding images
 To add images to the article you need to place the image in the assets/images folder.
 Please create a sub directory with the name of the article and place the images in there.
 Then you can add the image to the article with the following code:
-`![<Image description>](/assets/images/<article name>/<image name>)`
+```markdown
+![<image-description>]({{ '/assets/images/<article-name>/<image-name>' | relative_url }})
+```
 
 # Review process
 After you have created the article you need to create a pull request. if you are not done editing yet you can create a draft pull request. Within the draft pull request you can ask for feedback.
@@ -40,13 +58,15 @@ One of the approved community members will review the article and give you feedb
 
 ## Reviewing an article
 When reviewing an articles the following things should be checked:
+- Is the article complete?
+- Is the article correct?
 - Is the article in the correct category?
 - Is the article in the correct directory?
 - Is the article in the correct format?
 - Is the article in the correct language?
 - Is the article in the correct styling?
-- Is the article complete?
-- Is the article correct?
+- Are the hyperlinks correct?
+- Are the linked media files correct? (images, videos, etc.)
 
 If the article is not correct please give feedback to the author of the article in the pull request.
 If the article is correct please approve the pull request and merge it into the main branch.
