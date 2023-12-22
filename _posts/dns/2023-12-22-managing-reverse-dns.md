@@ -1,7 +1,7 @@
 ---
 layout: page
 tags: [DNS]
-page_title: Reverse DNS How to guide
+page_title: Managing Reverse DNS
 ---
 
 When creating an Floating IP or an Port with an external network a reverse DNS entry is automatically created.  
