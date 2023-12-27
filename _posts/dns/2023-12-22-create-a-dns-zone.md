@@ -28,6 +28,7 @@ If you want to change your reverse DNS for a floating IP, you can do this in the
 **Step 2**: Click on the `Zones` tab.  
 **Step 3**: Click on the zone of which you want to retrieve the Nameservers.  
 **Step 4**: Click on the `Record Sets` tab.  
-**Step 5**: Find the `NS - Name server` type (The `Records` of this entry are the nameservers normally something like `ns1.*` and `ns2.*`).
-
-## Creating DNS Records / Record Sets
+**Step 5**: Find the `NS - Name server` type (The `Records` of this entry are the nameservers normally something like `ns1.*` and `ns2.*`).  
+**Step 6**: Copy the `Records` of the `NS - Name server` type.  
+**Step 7**: Go to your domain registrar and change the nameservers to the ones you copied in the previous step.  
+**Step 8**: Wait for the nameserver change to propagate (this can take up to 24 hours).  

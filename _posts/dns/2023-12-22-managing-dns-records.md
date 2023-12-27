@@ -10,7 +10,6 @@ the `A` and `AAAA` record types. A recordset named `mail.example.com` can contai
 
 For this guide we assume you have already created a DNS Zone, if you haven't done this yet please follow the the following tutorial: [Create a DNS Zone]({{ '/articles/create-a-dns-zone' | relative_url }})
 
-
 ## Create a Record Set
 ---
 Creating a recordset in the OpenStack Dashboard is very easy, just follow the steps below.
