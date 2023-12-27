@@ -7,11 +7,11 @@ page_title: Rent an IPv4 range
 # Rent an IPv4 range team.blue
 
 Within some of the team.blue / TransIP / Combell OpenStack regions, it is possible to rent a dedicated IPv4 public IP range. 
-As a dedicated IPv4 range is an expensive resource, we need to share the network with you project first. 
+As a dedicated IPv4 range is an expensive resource, they need to share the network with your project first. 
 
 
 ### Create the network
-**Step 1** Ask support to share the BYoIP subnetpool to your project (provide them with your project ID)
+**Step 1**: Ask support to share the BYoIP subnetpool to your project (provide them with your project ID)
 **Step 2**: Log in to the OpenStack dashboard and proceed to the **Network** tab.  
 **Step 3**: Select **Networks** and then click on the **Create Network** button.  
 **Step 4**: Enter the required details in the following fields:  
@@ -33,10 +33,10 @@ As a dedicated IPv4 range is an expensive resource, we need to share the network
 * Leave all other fields blank, then click on **Create**.  
 
 **Step 6**
-* On the background, the network will be fine-tuned and configured. this should be done within 5 minutes. If not, please contact support
+* In the background, the network will be fine-tuned and configured. This should be done within 5 minutes, if not, you should contact support.
 
 ### Dual-Stack IPv4 and IPv6
-- When both an IPv4 and IPv6 address pools are added, an IPv4 and an IPv6 address will be allocated for each port created.
+- When both an IPv4 and IPv6 address pool are added, an IPv4 and an IPv6 address will be allocated for each port created.
 
 
 ### Delete the network
