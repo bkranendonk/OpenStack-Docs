@@ -4,7 +4,7 @@ tags: [DNS]
 page_title: Managing Reverse DNS
 ---
 
-When creating an Floating IP or an Port with an external network a reverse DNS entry is automatically created.  
+When creating a Floating IP or a Port with an external network a reverse DNS entry is automatically created.  
 The default reverse DNS entry might not be what you want, so you have the ability to change it in the OpenStack Dashboard.
 
 ## Floating IP
