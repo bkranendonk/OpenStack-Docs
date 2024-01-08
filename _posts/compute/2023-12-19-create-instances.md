@@ -13,7 +13,7 @@ The instancess will run an apache2 server and host a basic webpage with the inst
 ## Prerequisites
 
   This tutorial assumes an internal network is created that is connected to a router with an external gateway.
-You can create a network like this with the [Create an internal network]({{ '/articles/create-an-loadbalancer' | relative_url }}) tutorial.
+You can create a network like this with the [Create an internal network]({{ 'articles/create-an-internal-network' | relative_url }}) tutorial.
 
   At least one public key is added to your project for ssh authentication
 
