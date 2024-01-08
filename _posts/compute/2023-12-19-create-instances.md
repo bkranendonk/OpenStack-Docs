@@ -19,9 +19,8 @@ You can create a network like this with the [Create an internal network]({{ '/ar
 
 ---
 
-## Creating intances
-For this tutorial, we'll set up three instances in a single availability zone. Feel free to adjust the number of intances according  
-to your needs.
+## Creating instances
+For this tutorial, we'll set up three instances in a single availability zone. Feel free to adjust the number of instances according to your needs.
 
 **Step 1**: Access the `Compute` tab and select `Instances`.  
 **Step 2**: Initiate instance creation by clicking on the `Launch Instance` button.  
@@ -37,7 +36,7 @@ to your needs.
 * **Image Name**: Ubuntu 22.04 LTS
 
 **Step 5**: Choose a suitable flavor by clicking on the `Flavor` tab. For this tutorial, select the Standard 1 GB flavor.  
-**Step 6**: Select your network by clicking on the `Networks` tab. For this tutorial, we select net-public
+**Step 6**: Select your network by clicking on the `Networks` tab. For this tutorial, we select net-public  
 **Step 7**: Add necessary security by clicking on the `Security Groups` tab and selecting the `allow-remote-access` security group.  
 **Step 8**: Assign a key pair by clicking on the `Key Pair` tab. Select a key pair of your preference, or create or upload one here if you don't have one.  
 **Step 9**: Configure your setup by clicking on the `Configuration` tab. Custom cloud-init scripts can be put in to spawn a preconfigured instance. We will cover this in a later tutorial
