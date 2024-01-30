@@ -18,7 +18,9 @@ you can select the community image you want to use. Community images are shown a
 ## Creating a Community Image
 > Warning: Be aware that when you share an image with the community, you are sharing it with all users on the platform of the OpenStack provider.
 
-When you want to create a community image, you need to upload an image to OpenStack and then share it with the community by setting the visibility to `Community`.
+When you want to create a community image, you need to upload an image to OpenStack and then share it with the community by setting the visibility to `Community`.  
+You can do this by logging in to the OpenStack Dashboard and going to the `Compute` > `Images` tab. Then click on the `Create Image` button to create a new image.  
+How you want   or need to configure your image does not really matter; the only thing you are required to do is set the `Visibility` to `Community` to make the image a community image.
 
 > Note: Some providers may have disabled community image creation by default. If you want to create a community image, you may have to contact their support.  
 Providers do this mainly to protect their users from malicious images by first checking the creators of the images before allowing them to create community images.
@@ -44,7 +46,7 @@ Using community images does not mean that you are automatically exploited. Most 
 always stay aware of the risks community images bring with them. If you want to be sure that the image is safe, you can always use the images  
 provided by the OpenStack provider or create your own images and use those.
 
-## Support for Community Image
+## Support for Community Images
 Sadly, support for community images at most providers is not included. If you have any issues with a community image, please contact the owner of the image.  
 Most of the time, the owner of the image will be able to help you with your issue. If the owner of the image is not able to help you with your issue, you  
 can always contact the support team of the OpenStack provider. However, the support of the OpenStack provider may not be able to help you with your issue  
