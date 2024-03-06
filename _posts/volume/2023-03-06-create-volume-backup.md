@@ -16,6 +16,14 @@ volume using the OpenStack Dashboard and the OpenStack CLI. If you do not yet
 have a volume which you want to backup then please refer to the
 [Create a volume]({{ '/articles/create-a-volume' | relative_url }}) article.
 
+Volume backups are stored in the same availability zone as the volume. This
+means that if the availability zone is down, the backup is also not available.
+It is recommended to create backups in an other availability zone to prevent
+data loss in case of an availability zone failure. As of march 2024, the
+OpenStack Dashboard does not support creating backups in an other availability
+zone. You can use the OpenStack CLI to create a backup in an other availability
+zone.
+
 ## Using the OpenStack Dashboard
 Create a volume backup using the OpenStack Dashboard is quite simple. With
 the following steps you can create a backup of a volume.
@@ -88,6 +96,8 @@ argument to the command above the make the backup.
 
 > Note: If you want to create the backup in an other availability zone, you can
 add `--availability-zone <availability-zone>` argument to the command above.
+When adding the availability-zone argument, you may have to add the
+`--os-volume-api-version 3.51` argument.
 
 ---
 
