@@ -176,6 +176,11 @@ You can now use the volume to store your data.
 If you want to mount the volume automatically after a reboot, we need to add
 an entry to the `/etc/fstab` file.
 
+When managing multiple volumes on a single instance, it might be more feasible 
+to use the procedure on 
+[Identify cinder volumes from within the instance]({{ '/articles/Identify-cinder-volumes-from-within-the-instance' | relative_url }}).
+Or use the steps below. Both procedures result in an automatically mounted volume
+
 **Step 1**  
 First we need to identify the volume by its UUID. You can do this by running
 the following command:
