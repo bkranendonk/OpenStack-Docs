@@ -10,7 +10,8 @@ page_title: Resize a volume
 Volumes are a great way to store data for your instances. However, sometimes
 you may need to resize a volume to add more space. This article will guide you
 through the process of resizing a volume within OpenStack and resizing the
-filesystem within the instance (server).
+filesystem within the instance (server). For most OpenStack environments, 
+a live extend is possible.
 
 ## Using the OpenStack Dashboard
 To resize a volume using the OpenStack Dashboard, please follow these steps:  
