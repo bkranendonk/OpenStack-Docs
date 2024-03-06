@@ -21,9 +21,11 @@ To create a DNS zone you can use the OpenStack Dashboard or the OpenStack CLI.
 
 To create a DNS zone using the OpenStack Dashboard please follow the steps in
 the
-[Create a zone using the OpenStack Dashboard](#create-a-zone-using-the-openstack-dashboard) section.  
+[Create a zone using the OpenStack Dashboard](#create-a-zone-using-the-openstack-dashboard)
+section.  
 To create a DNS zone using the OpenStack CLI please follow the steps in the
-[Create a zone using the OpenStack CLI](#create-a-zone-using-the-openstack-cli) section.
+[Create a zone using the OpenStack CLI](#create-a-zone-using-the-openstack-cli)
+section.
 
 ### Create a zone using the OpenStack Dashboard
 The following steps will guide you through the process of creating a DNS zone
