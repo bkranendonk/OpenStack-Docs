@@ -4,7 +4,7 @@ tags: [Loadbalancers]
 page_title: Introduction into loadbalancer 
 ---
 
-In this article, the basic concept of OpenStack Octavia loadbalancers are explained. this includes
+In this article, the basic concept of OpenStack Octavia loadbalancers are explained. This includes
 the uses, options, benefits and how to create a loadbalancer.
 
 ## Introduction
