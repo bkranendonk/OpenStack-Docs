@@ -54,20 +54,9 @@ openstack volume list
 ```
 
 **Step 3**  
-If the volume is attached to an instance, you will need to detach the volume
-before you can resize it. You can do this using the following command
-```bash
-openstack server remove volume <server-name-or-id> <volume-name-or-id>
-```
-**Step 4**  
 Run the following command to resize the volume
 ```bash
-openstack volume set --size <new-size-in-gb> <volume-id-or-name>
-```
-**Step 5**  
-Now we need to re-attach the volume to the instance
-```bash
-openstack server add volume <server-name-or-id> <volume-name-or-id>
+openstack --os-volume-api-version 3.42 volume set --size <new-size-in-gb> <volume-id-or-name>
 ```
 
 Your volume is now be resized within OpenStack. Please note that you may need
