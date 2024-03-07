@@ -16,6 +16,10 @@ If you want to learn more about the `designate` service, you can read the
 [OpenStack Designate](https://docs.openstack.org/designate/latest/)
 documentation.
 
+If you want to manage your Reverse DNS records please read the article about
+[managing reverse DNS records](
+{{ '/articles/managing-reverse-dns' | relative_url }}).
+
 ## Create the DNS Zone
 To create a DNS zone you can use the OpenStack Dashboard or the OpenStack CLI.
 

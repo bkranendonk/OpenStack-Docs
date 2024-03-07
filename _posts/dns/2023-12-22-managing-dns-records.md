@@ -14,6 +14,10 @@ For this guide we assume you have already created a DNS Zone, if you haven't
 done this yet please read the following article:
 [Create a DNS Zone]({{ '/articles/create-a-dns-zone' | relative_url }})
 
+If you want to manage your Reverse DNS records please read the article about
+[managing reverse DNS records](
+{{ '/articles/managing-reverse-dns' | relative_url }}).
+
 ---
 
 ## Create a Record Set
