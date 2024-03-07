@@ -30,21 +30,63 @@ most common Linux distributions.
 For Windows installations please see
 [Using the OpenStack CLI (Windows)]({{ '/articles/using-the-cli-windows' | relative_url }}).
 
+[Instruction for Debian](#debian-10-11-12)  
+[Instruction for Ubuntu](#ubuntu-2004--2204)  
+[Instruction for CentOS Stream](#centos-stream-8-9--rhel-8-9--rocky-linux-8-9--almalinux-8-9)  
 
-### Debian (10, 11, 12) | Ubuntu (20.04 | 22.04)
+### Debian (10, 11, 12)
 To install the OpenStack CLI, run the following commands:
 
 **Step 1**  
-Update our package list to make sure we install the latest version of the
+Update your package list to make sure we install the latest version of the
 OpenStack CLI.
 ```bash
 sudo apt update
 ```
 
 **Step 2**  
-Install the OpenStack CLI
+We will now install the OpenStack CLI
+
+> Note: Installing the OpenStack CLI using the package manager will install
+the OpenStack CLI and all the required dependencies. The downside of this 
+method is that you might not have the latest version of the OpenStack CLI.
+If you want to install the latest version of the OpenStack CLI, you can use
+pip3 to install the OpenStack CLI, more information can be found on the
+[python-openstackclient PyPi page](https://pypi.org/project/python-openstackclient/).
+
 ```bash
 sudo apt install python3-openstackclient
+```
+
+After the installation has finished proceed to
+[Preparing your OpenStack Credentials](#preparing-your-openstack-credentials).
+
+### Ubuntu (20.04 | 22.04)
+To install the OpenStack CLI, run the following commands:
+
+**Step 1**  
+Update your package list to make sure we install the latest version of the
+OpenStack CLI.
+```bash
+sudo apt update
+```
+
+**Step 2**  
+Install python3 and pip3 which are required to install the OpenStack CLI
+```bash
+sudo apt install python3 python3-pip
+```
+
+**Step 3**  
+We will now update pip3 to make sure we use the latest version of pip3
+```bash
+sudo pip3 install --upgrade pip
+```
+
+**Step 4**  
+Now we can install the OpenStack CLI
+```bash
+sudo pip3 install python-openstackclient
 ```
 
 After the installation has finished proceed to
