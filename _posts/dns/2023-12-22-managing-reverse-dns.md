@@ -18,11 +18,11 @@ the OpenStack Dashboard or using the OpenStack CLI.
 
 To edit the Reverse DNS of Floating IP using the
 OpenStack Dashboard please follow the steps in the
-[Edit a Floating IP Reverse DNS using the OpenStack Dashboard](#edit-a-record-set-using-the-openstack-dashboard)
+[Edit a Floating IP Reverse DNS using the OpenStack Dashboard](#edit-a-floating-ip-reverse-dns-using-the-openstack-dashboard)
 section.  
 To edit the Reverse DNS of Floating IP using the
 OpenStack CLI please follow the steps in the
-[Edit a Floating IP Reverse DNS using the OpenStack CLI](#edit-a-record-set-using-the-openstack-cli)
+[Edit a Floating IP Reverse DNS using the OpenStack CLI](#edit-a-floating-ip-reverse-dns-using-the-openstack-cli)
 section. 
 
 ### Edit a Floating IP Reverse DNS using the OpenStack Dashboard
