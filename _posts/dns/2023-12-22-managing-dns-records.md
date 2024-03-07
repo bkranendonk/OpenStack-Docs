@@ -33,7 +33,7 @@ the
 section.  
 To create a Record Set using the OpenStack CLI please follow the steps in
 the
-[Create a Record Set using the OpenStack Dashboard](#create-a-record-set-using-the-openstack-cli)
+[Create a Record Set using the OpenStack CLI](#create-a-record-set-using-the-openstack-cli)
 section. 
 
 
@@ -129,7 +129,7 @@ the
 section.  
 To edit a Record Set using the OpenStack CLI please follow the steps in
 the
-[Edit a Record Set using the OpenStack Dashboard](#edit-a-record-set-using-the-openstack-cli)
+[Edit a Record Set using the OpenStack CLI](#edit-a-record-set-using-the-openstack-cli)
 section. 
 
 ### Edit a Record Set using the OpenStack Dashboard
@@ -214,7 +214,7 @@ the
 section.  
 To delete a Record Set using the OpenStack CLI please follow the steps in
 the
-[Delete a Record Set using the OpenStack Dashboard](#delete-a-record-set-using-the-openstack-cli)
+[Delete a Record Set using the OpenStack CLI](#delete-a-record-set-using-the-openstack-cli)
 section. 
 
 ### Delete a Record Set using the OpenStack Dashboard
