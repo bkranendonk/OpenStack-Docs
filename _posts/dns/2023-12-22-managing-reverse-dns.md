@@ -12,6 +12,16 @@ ability to change it in the OpenStack Dashboard.
 ---
 
 ## Floating IP
+To change your Floating IP Reverse DNS using the OpenStack Dashboard please
+follow the steps in the
+[Edit a Floating IP Reverse DNS using the OpenStack Dashboard](#edit-a-record-set-using-the-openstack-dashboard)
+section.  
+To edit a Record Set using the OpenStack CLI please follow the steps in
+the
+[Edit a Floating IP Reverse DNS using the OpenStack CLI](#edit-a-record-set-using-the-openstack-cli)
+section. 
+
+### Edit a Floating IP Reverse DNS using the OpenStack Dashboard
 If you want to change your reverse DNS for a floating IP, you can do this in
 the OpenStack Dashboard.
 
@@ -33,9 +43,38 @@ DNS will be active within 5 minutes)
  `DNS Domain` and `DNS Name` to configure the Reverse DNS. (Please make sure
  the DNS Domain ends with a dot)
 
-> Note: After changing the Reverse DNS for a Floating IP, it might take a few
+Your Reverse DNS for your FloatingIP will now be changed, it might take a few
 minutes before the change is resolvable from the outside world.
 
+### Edit a Floating IP Reverse DNS using the OpenStack CLI
+If you want to change your reverse DNS for a floating IP, you can do this in
+the OpenStack CLI.
+
+**Step 1**  
+First make sure you have setup the OpenStack CLI and that you are able to
+execute commands using the `openstack` command. For more information please
+refer to the
+[Using the OpenStack CLI article](
+    {{ '/articles/using-the-cli-linux' | relative_url }}
+).
+
+**Step 2**
+Run the following command to retrieve all the current reverse DNS entries for
+Floating IP's in your project:
+```bash
+openstack ptr record list
+```
+**Step 3**
+Run the following command to change the reverse DNS for a Floating IP. Make
+sure to replace `<ptr_record_id>` with the ID of the reverse DNS entry and
+`<record-name>` with the new reverse DNS you want to set (make sure it ends
+with a dot).
+```bash
+openstack ptr record set <ptr_record_id> <record-name>
+```
+
+Your Reverse DNS for your FloatingIP will now be changed, it might take a few
+minutes before the change is resolvable from the outside world.
 
 ---
 
