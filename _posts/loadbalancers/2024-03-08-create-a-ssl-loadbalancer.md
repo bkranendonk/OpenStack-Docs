@@ -15,14 +15,14 @@ of article [Create a loadbalancer with webservers]({{ '/articles/create-a-loadba
 ## SSL certificate
 Before creating the load balancer, we need to store our SSL certificaten in OpenStack. We are using 
 Keymanager to do so. To read more about Keymanaer, refer to the article 
-[Introduction into Keymanager]({{ '/articles/Introduction-into-Keymanager' | relative_url }}).
+[Introduction to Keymanager]({{ '/articles/Introduction-to-Keymanager' | relative_url }}).
 Currently it is not possible to upload the certificate through Horizon so we will be using the CLI.
 There are multiple options to upload the certificate to barbican. Our advise would be to use the
 container approach 
 ([Uploading the SSL certificate to keymanager in a container](#uploading-the-SSL-certificate-to-keymanager-in-a-container))
 . The easier option is the combined, although slightly less secure, approach
 which has the benefit of being selectable in horizon after storing 
-([Uploading the SSL certificate to keymanager as single file](#uploading-the-SSL-certificate-to-keymanager-as-single-file))
+([Uploading the SSL certificate to keymanager as single file](#uploading-the-ssl-certificate-to-keymanager-as-single-file))
 .
 
 ### Uploading the SSL certificate to keymanager in a container
@@ -33,7 +33,7 @@ storing the secrets, we can combine them using a certificate container. The down
 approach however is secret containers are not yet supported in Horizon to use for Octavia.
 
 **Prerequisites**
- - All certificates files are stored on the OpenStack CLI server. We need the following files":
+ - All certificates files are stored on the OpenStack CLI server. We need the following files:
    - certificate.pem (the certificate file for the load balancer)
    - private.key (the private key for the load balancer, password protected)
    - intermediate.pem (intermediate certificates in proper order of your SSL supplier)
@@ -56,7 +56,9 @@ Store the certificate in barbican
 certificate=certificate.pem
 domain="$(openssl x509 -noout -subject -in "$certificate"|cut -d= -f 3| tr -d ' ')"
 name="${domain}_certificate"
-openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' --payload="$(base64 < "$certificate")" --expiration $(date --date="$(openssl x509 -enddate -noout -in "$certificate"|cut -d= -f 2)" --iso-8601)
+openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' \
+--payload="$(base64 < "$certificate")" --expiration $(date --date="$(openssl x509 -enddate -noout \
+-in "$certificate"|cut -d= -f 2)" --iso-8601)
 ```
 Make sure to save the returned secret_href as variable, we need that later
 ```bash
@@ -68,7 +70,8 @@ Store the passhprase for the private key in barbican.
 
 ```bash
 name="${domain}_passphrase"
-openstack secret store --secret-type passphrase --name ${name} --payload $(read -sp "Password: ";echo ${REPLY})
+openstack secret store --secret-type passphrase --name ${name} \
+--payload $(read -sp "Password: ";echo ${REPLY})
 ```
 Answer the password question and press enter
 
@@ -83,7 +86,8 @@ Store the private key in barbican
 ```bash
 name="${domain}_private_key"
 certificate=private.key
-openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' --payload="$(base64 < "$certificate")"
+openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' \
+--payload="$(base64 < "$certificate")"
 ```
 Make sure to save the returned secret_href as variable, we need that later
 ```bash
@@ -96,7 +100,9 @@ Store all intermediate certificates in barbican
 ```bash
 certificate=intermediate.pem
 name="${domain}_intermediates"
-openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' --payload="$(base64 < "$certificate")" --expiration $(date --date="$(openssl x509 -enddate -noout -in "$certificate"|cut -d= -f 2)" --iso-8601)
+openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' \
+--payload="$(base64 < "$certificate")" --expiration $(date --date="$(openssl x509 -enddate -noout \
+-in "$certificate"|cut -d= -f 2)" --iso-8601)
 ```
 Make sure to save the returned secret_href as variable, we need that later
 ```bash
@@ -109,7 +115,9 @@ the passphrase and the private key.
 
 ```bash
 name="${domain}_container"
-openstack secret container create --name "${name}" --type certificate -s "certificate=${certificate_url}" -s "intermediates=${intermediates_url}" -s "private_key=${private_key_url}" -s "private_key_passphrase=${passphrase_url}"
+openstack secret container create --name "${name}" --type certificate \
+-s "certificate=${certificate_url}" -s "intermediates=${intermediates_url}" \
+-s "private_key=${private_key_url}" -s "private_key_passphrase=${passphrase_url}"
 
 ```
 Make sure to save the returned secret_href as variable, we need that later
@@ -141,7 +149,8 @@ refer to the
 Convert the certificates to a pkcs12 certificate (skip this if you already have a pkcs12 encoded
 file with all required certificates):
 ```bash
-openssl pkcs12 -export -inkey private.key -in certificate.pem -certfile intermediate.pem -passout pass: -out complete.p12
+openssl pkcs12 -export -inkey private.key -in certificate.pem -certfile intermediate.pem \
+-passout pass: -out complete.p12
 ```
 
 **Step 3**
@@ -149,10 +158,13 @@ openssl pkcs12 -export -inkey private.key -in certificate.pem -certfile intermed
 Store the certificate in barbican
 ```bash
 certificate=complete.p12
-domain="$(openssl pkcs12 -in "$certificate" -nokeys -passin pass: | openssl x509 -noout -subject |cut -d= -f 3| tr -d ' ')"
+domain="$(openssl pkcs12 -in "$certificate" -nokeys -passin pass: | openssl x509 -noout \
+-subject | cut -d= -f 3| tr -d ' ')"
 name="${domain}_complete_certificate"
-expiration_date="$(date --date="$(openssl pkcs12 -in "$certificate" -nokeys -passin pass: | openssl x509 -enddate -noout | cut -d= -f 2)" --iso-8601)"
-openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' --payload="$(base64 < "$certificate")" --expiration "${expiration_date}"
+expiration_date="$(date --date="$(openssl pkcs12 -in "$certificate" -nokeys -passin pass: | \
+openssl x509 -enddate -noout | cut -d= -f 2)" --iso-8601)"
+openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' \
+--payload="$(base64 < "$certificate")" --expiration "${expiration_date}"
 ```
 Make sure to save the returned secret_href as variable, we need that later
 ```bash
@@ -160,6 +172,8 @@ octavia_certificate_url="https://keymanager.domain.tld:/v1/secrets/uuid"
 ```
 
 ---
+
+## Creating the loadbalancer
 
 ## Creating the loadbalancer using the OpenStack Dashboard
 > Note: When you decided to store your certificate through a container, it is not easy to create the
@@ -237,13 +251,10 @@ appropriate certificate
 the dropdown menu, select `Associate Floating IP`.  
 **Step 17**: Select an available floating IP or choose the net-float pool, then confirm your choice
 by clicking on `Associate`.  
-**Step 18**: Create an A record in DNS for the domain to point to the floating IP address
-[managing DNS records](
-{{ '/articles/managing-dns-records' | relative_url }})
-**Step 19**: Await the update of the load balancer's Operating Status to ONLINE and the DNS to
-propagate. Once this status is achieved, navigate to `https://DomainName` in your web browser to 
-witness your load balancer functioning.  
 
+**Step 18
+Finalize the deployment and start testing
+([Testing the loadbalancer](#testing-the-loadbalancer))
 
 ## Creating the loadbalancer using the OpenStack CLI
 Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a
@@ -266,7 +277,8 @@ vip_subnet_uuid="uuid"
 
 Create the loadbalancer
 ```bash
-openstack loadbalancer create --name "webserver-loadbalancer" --description "Loadbalancer for our webservers" --flavor Medium --vip-subnet-id "${vip_subnet_uuid}"
+openstack loadbalancer create --name "webserver-loadbalancer" \
+--description "Loadbalancer for our webservers" --flavor Medium --vip-subnet-id "${vip_subnet_uuid}"
 ```
 Make sure to save the returned `id` as variable, we need that later
 ```bash
@@ -276,7 +288,9 @@ lb_uuid=uuid
 **Step 3**
 Create the listener
 ```bash
-openstack loadbalancer listener create "${lb_uuid}" --name "webserver-listener-https" --description "HTTPS Listener for our webservers" --protocol TERMINATED_HTTPS --protocol-port 443 --default-tls-container-ref "${octavia_certificate_url}" 
+openstack loadbalancer listener create "${lb_uuid}" --name "webserver-listener-https" \
+--description "HTTPS Listener for our webservers" --protocol TERMINATED_HTTPS --protocol-port 443 \
+--default-tls-container-ref "${octavia_certificate_url}" 
 ```
 
 Make sure to save the returned `id` as variable, we need that later
@@ -289,7 +303,9 @@ listener_uuid=uuid
 Create the pool
 
 ```bash
-openstack loadbalancer pool create --name "webserver-pool-http" --description "HTTP Pool for our webservers" --protocol HTTP --lb-algorithm LEAST_CONNECTIONS --listener "${listener_uuid}"
+openstack loadbalancer pool create --name "webserver-pool-http" \
+--description "HTTP Pool for our webservers" --protocol HTTP --lb-algorithm LEAST_CONNECTIONS \
+--listener "${listener_uuid}"
 ```
 Make sure to save the returned `id` as variable, we need that later
 ```bash
@@ -303,7 +319,8 @@ pool_uuid="uuid"
 Create the health monitor
 
 ```bash
-openstack loadbalancer healthmonitor create "${pool_uuid}" --name "webserver-healthmonitor-http" --type HTTP --delay 5 --timeout 5 --max-retries 3
+openstack loadbalancer healthmonitor create "${pool_uuid}" --name "webserver-healthmonitor-http" \
+--type HTTP --delay 5 --timeout 5 --max-retries 3
 
 ```
 
@@ -314,11 +331,26 @@ Create the members
 repeat the following command for all webservers you want to add to the pool
 
 ```bash
-openstack loadbalancer member create "${pool_uuid}" --protocol-port 80 --name "<server_name>" --address "<server_address>"
+openstack loadbalancer member create "${pool_uuid}" --protocol-port 80 --name "<server_name>" \
+--address "<server_address>"
 ```
+
+**Step 7**
+Finalize the deployment and start testing
+([Testing the loadbalancer](#testing-the-loadbalancer))
+
 
 ---
 
+## Testing the loadbalancer.
+Now that the load balancer is created, we can test it
+
+**Step 1**: Create an A record in DNS for the domain to point to the floating IP address
+[managing DNS records](
+{{ '/articles/managing-dns-records' | relative_url }})
+**Step 2**: Await the update of the load balancer's Operating Status to ONLINE and the DNS to
+propagate. Once this status is achieved, navigate to `https://DomainName` in your web browser to 
+witness your load balancer functioning.  
 
 
 If you want to customize your Loadbalancer even further we highly recommend you to read the 
