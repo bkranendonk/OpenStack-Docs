@@ -59,7 +59,7 @@ which the traffic should be forwarded.
 ## Pools
 A pool is a group of backend servers or applications to which the traffic
 should be forwarded. The pools are used to define the protocol, the algorithm,
-and the `1` servers for the specific [Listener](#listeners).
+and the backend servers for the specific [Listener](#listeners).
 
 ### Loadbalancer Algorithms
 Pool algorithms are used to define the way the traffic should be distributed to
