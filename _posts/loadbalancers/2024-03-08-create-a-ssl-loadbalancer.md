@@ -15,11 +15,11 @@ of article [Create a loadbalancer with webservers]({{ '/articles/create-a-loadba
 ## SSL certificate
 Before creating the load balancer, we need to store our SSL certificaten in OpenStack. We are using 
 Keymanager to do so. To read more about Keymanaer, refer to the article 
-[Introduction to Keymanager]({{ '/articles/Introduction-to-Keymanager' | relative_url }}).
+[Introduction to Keymanager]({{ '/articles/introduction-to-keymanager' | relative_url }}).
 Currently it is not possible to upload the certificate through Horizon so we will be using the CLI.
 There are multiple options to upload the certificate to barbican. Our advise would be to use the
 container approach 
-([Uploading the SSL certificate to keymanager in a container](#uploading-the-SSL-certificate-to-keymanager-in-a-container))
+([Uploading the SSL certificate to keymanager in a container](#uploading-the-ssl-certificate-to-keymanager-in-a-container))
 . The easier option is the combined, although slightly less secure, approach
 which has the benefit of being selectable in horizon after storing 
 ([Uploading the SSL certificate to keymanager as single file](#uploading-the-ssl-certificate-to-keymanager-as-single-file))
@@ -178,7 +178,7 @@ octavia_certificate_url="https://keymanager.domain.tld:/v1/secrets/uuid"
 ## Creating the loadbalancer using the OpenStack Dashboard
 > Note: When you decided to store your certificate through a container, it is not easy to create the
 load balancer through the OpenStack Dashboard. Follow the step 
-([Creating the loadbalancer using the OpenStack CLI](#creating-the-loadbalancer-using-the-OpenStack-CLI))
+([Creating the loadbalancer using the OpenStack CLI](#creating-the-loadbalancer-using-the-openstack-cli))
 
 Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a
 healthmonitor.
