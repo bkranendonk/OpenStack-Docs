@@ -41,6 +41,17 @@ site the text will be placed as if the 79 character limit is not there.
 
 
 ### Adding Hyperlinks
+Hyperlinks are an amazing tool to reference other articles or external pages.
+Within cloudtutorials we split up hyperlinks into two categories: 
+- Hyperlink to local page/article
+- Hyperlink to external page
+
+Whenever you want to create an hyperlink which needs to be opened in a new tab
+you need to add the following code to the hyperlink:
+```markdown
+[<link-text>](<link-url>){:target="_blank"}
+```
+
 #### Hyperlink to local page/article
 To add a hyperlink an article on the same site you need to use the following
 code, the relative_url filter is used
