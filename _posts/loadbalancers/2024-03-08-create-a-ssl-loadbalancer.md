@@ -212,8 +212,8 @@ Leave all others options as they are for now.
 * **TLS Enabled** No
 * **Admin State Up**: Yes
 > Note: Find out more about the `Algorithm` and `Session Persistence` fields in the article
-[Introduction into loadbalancers](
-{{ '/articles/introduction-into-loadbalancers' | relative_url }})
+[Introduction into loadbalancer](
+{{ '/articles/introduction-into-loadbalancer' | relative_url }})
 
 
 
