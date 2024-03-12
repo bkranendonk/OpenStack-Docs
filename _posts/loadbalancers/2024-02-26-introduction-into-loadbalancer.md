@@ -1,8 +1,10 @@
 ---
 layout: page
 tags: [Loadbalancers]
-page_title: Introduction into loadbalancer 
+page_title: Introduction into loadbalancers
 ---
+
+# Introduction into loadbalancers
 
 In this article, the basic concept of OpenStack Octavia loadbalancers are
 explained. This includes the uses, options, benefits and how to create a
@@ -140,3 +142,9 @@ can be used to distribute the incoming traffic to multiple servers. This can in
 turn increase the availability of the servers and the applications. OpenStack
 Octavia provides a on-demand and reliable loadbalancer service which is easy to
 use and manage for your cloud infrastructure.
+
+Now that you know everything you need to know about loadbalancers, you can
+start creating your own loadbalancer setup. We highly recommend to read the
+article about [creating a loadbalancer with webservers](
+{{ '/articles/create-a-loadbalancer-with-webservers' | relative_url }}) to get
+started with OpenStack Octavia.
