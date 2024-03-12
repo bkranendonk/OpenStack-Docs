@@ -348,6 +348,8 @@ Now that the load balancer is created, we can test it
 **Step 1**: Create an A record in DNS for the domain to point to the floating IP address
 [managing DNS records](
 {{ '/articles/managing-dns-records' | relative_url }})
+
+
 **Step 2**: Await the update of the load balancer's Operating Status to ONLINE and the DNS to
 propagate. Once this status is achieved, navigate to `https://DomainName` in your web browser to 
 witness your load balancer functioning.  
