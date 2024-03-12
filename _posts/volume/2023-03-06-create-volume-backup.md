@@ -85,14 +85,16 @@ openstack volume list
 
 **Step 3**  
 Create a backup of the volume using the following command. Replace
-`<volume-id>` with the ID of the volume you want to backup.
+`<volume-id>` with the ID of the volume you want to backup. Replace
+`<backup-name>` with the name of the backup and `<backup-description>` with the
+description of the backup.
 
 ```bash
 openstack volume backup create <volume-id> --name <backup-name> --description <backup-description>
 ```
 
-> Note: If you want to create an incremental backup, you can add `--incremental`
-argument to the command above the make the backup.
+> Note: If you want to create an incremental backup, you can add
+`--incremental` argument to the command above the make the backup.
 
 > Note: If you want to create the backup in an other availability zone, you can
 add `--availability-zone <availability-zone>` argument to the command above.

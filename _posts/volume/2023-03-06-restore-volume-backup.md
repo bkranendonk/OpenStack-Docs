@@ -14,7 +14,8 @@ corruption.
 This article will guide you through the process of restoring a backup of a
 volume using the OpenStack Dashboard and the OpenStack CLI. If you do not yet
 have a backup which you want to restore then please refer to the
-[Create a volume backup]({{ '/articles/create-volume-backup' | relative_url }}) article.
+[Create a volume backup]({{ '/articles/create-volume-backup' | relative_url }})
+article.
 
 ## Using the OpenStack Dashboard
 
@@ -87,6 +88,14 @@ option might not work, in this case you need to create a new volume and then
 restore the backup to the new volume using the instructions in the
 [Restore backup to an existing volume](#restore-backup-to-an-existing-volume)
 section.
+
+> Note: If you want to restore the backup to an other availability zone, you
+can add `--availability-zone <availability-zone>` argument to the command
+above.
+
+> Note: If you want to restore the backup to a specific volume type
+you can add `--type <volume-type>` argument to the command above. For example
+`--type ssd` to restore the backup to a volume with the `ssd` volume type.
 
 ### Restore backup to an existing volume
 
