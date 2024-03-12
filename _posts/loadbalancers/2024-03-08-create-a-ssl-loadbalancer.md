@@ -162,11 +162,12 @@ octavia_certificate_url="https://keymanager.domain.tld:/v1/secrets/uuid"
 ---
 
 ## Creating the loadbalancer using the OpenStack Dashboard
-When you decided to store your certificate through a container, it is not easy to create the
-load balancer through the OpenStack Dashboard. Follow the step #TODO: to create your loadbalancer.
+> Note: When you decided to store your certificate through a container, it is not easy to create the
+load balancer through the OpenStack Dashboard. Follow the step 
+([Creating the loadbalancer using the OpenStack CLI](#creating-the-loadbalancer-using-the-OpenStack-CLI))
 
 Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a
-healthmonitor. It is only possible to create the loadbalancer through 
+healthmonitor.
 
 **Step 1**: Navigate to the `Network` tab and select `Load Balancers`.  
 **Step 2**: Initiate the process by clicking on the `Create Load Balancer` button.  
@@ -244,16 +245,81 @@ propagate. Once this status is achieved, navigate to `https://DomainName` in you
 witness your load balancer functioning.  
 
 
-Store the certificate in barbican
+## Creating the loadbalancer using the OpenStack CLI
+Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a
+healthmonitor. It is only possible to create the loadbalancer through 
+
+**Prerequisites**
+We should already have a bash variable set with the certificate location
 ```bash
-certificate=certificate.pem
-domain="$(openssl x509 -noout -subject -in "$certificate"|cut -d= -f 3| tr -d ' ')"
-name="${domain}_certificate"
-openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' --payload="$(base64 < "$certificate")" --expiration $(date --date="$(openssl x509 -enddate -noout -in "$certificate"|cut -d= -f 2)" --iso-8601)
+octavia_certificate_url="https://keymanager.domain.tld:/v1/containers/uuid"
 ```
-Make sure to save the returned secret_href as variable, we need that later
+**Step 1**
+
+Gather the subnet uuid for the internal network:
 ```bash
-octavia_certificate_url="https://keymanager.domain.tld:/v1/secrets/uuid"
+openstack subnet list
+vip_subnet_uuid="uuid"
+```
+
+**Step 2**
+
+Create the loadbalancer
+```bash
+openstack loadbalancer create --name "webserver-loadbalancer" --description "Loadbalancer for our webservers" --flavor Medium --vip-subnet-id "${vip_subnet_uuid}"
+```
+Make sure to save the returned `id` as variable, we need that later
+```bash
+lb_uuid=uuid
+```
+
+**Step 3**
+Create the listener
+```bash
+openstack loadbalancer listener create "${lb_uuid}" --name "webserver-listener-https" --description "HTTPS Listener for our webservers" --protocol TERMINATED_HTTPS --protocol-port 443 --default-tls-container-ref "${octavia_certificate_url}" 
+```
+
+Make sure to save the returned `id` as variable, we need that later
+```bash
+listener_uuid=uuid
+```
+
+**Step 4**
+
+Create the pool
+
+```bash
+openstack loadbalancer pool create --name "webserver-pool-http" --description "HTTP Pool for our webservers" --protocol HTTP --lb-algorithm LEAST_CONNECTIONS --listener "${listener_uuid}"
+```
+Make sure to save the returned `id` as variable, we need that later
+```bash
+pool_uuid="uuid"
 ```
 
 
+**Step 5**
+
+
+Create the health monitor
+
+```bash
+openstack loadbalancer healthmonitor create "${pool_uuid}" --name "webserver-healthmonitor-http" --type HTTP --delay 5 --timeout 5 --max-retries 3
+
+```
+
+**Step 6**
+
+Create the members
+
+repeat the following command for all webservers you want to add to the pool
+
+```bash
+openstack loadbalancer member create "${pool_uuid}" --protocol-port 80 --name "<server_name>" --address "<server_address>"
+```
+
+---
+
+
+
+If you want to customize your Loadbalancer even further we highly recommend you to read the 
+[OpenStack Octavia Loadbalancer documentation](https://docs.openstack.org/octavia/latest/user/index.html)
