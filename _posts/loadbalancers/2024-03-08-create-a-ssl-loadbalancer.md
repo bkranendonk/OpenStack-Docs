@@ -118,7 +118,12 @@ octavia_certificate_url="https://keymanager.domain.tld:/v1/containers/uuid"
 ```
 
 ### Uploading the SSL certificate to keymanager as single file
-The alternative way to store 
+The alternative way to store a certificate to use with an Octavia loadbalancer is to create a single
+pkcs12 file with all certificates without password protection.
+The downside of this approach is we need to temporarily store the unencrypted private key for the
+load balancer on the OpenStack CLI server. The benefit is we can select the certificate in Horizon.
+
+
 **Prerequisites**
  - The server certificate, intermediate certificates and private key are stored in the proper order in
 a single file on the OpenStack CLI server named 'certificate.pem'
@@ -133,6 +138,111 @@ refer to the
 ).
 
 **Step 2**
+Convert the certificates to a pkcs12 certificate (skip this if you already have a pkcs12 encoded
+file with all required certificates):
+```bash
+openssl pkcs12 -export -inkey private.key -in certificate.pem -certfile intermediate.pem -passout pass: -out complete.p12
+```
+
+**Step 3**
+
+Store the certificate in barbican
+```bash
+certificate=complete.p12
+domain="$(openssl pkcs12 -in "$certificate" -nokeys -passin pass: | openssl x509 -noout -subject |cut -d= -f 3| tr -d ' ')"
+name="${domain}_complete_certificate"
+expiration_date="$(date --date="$(openssl pkcs12 -in "$certificate" -nokeys -passin pass: | openssl x509 -enddate -noout | cut -d= -f 2)" --iso-8601)"
+openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' --payload="$(base64 < "$certificate")" --expiration "${expiration_date}"
+```
+Make sure to save the returned secret_href as variable, we need that later
+```bash
+octavia_certificate_url="https://keymanager.domain.tld:/v1/secrets/uuid"
+```
+
+---
+
+## Creating the loadbalancer using the OpenStack Dashboard
+When you decided to store your certificate through a container, it is not easy to create the
+load balancer through the OpenStack Dashboard. Follow the step #TODO: to create your loadbalancer.
+
+Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a
+healthmonitor. It is only possible to create the loadbalancer through 
+
+**Step 1**: Navigate to the `Network` tab and select `Load Balancers`.  
+**Step 2**: Initiate the process by clicking on the `Create Load Balancer` button.  
+**Step 3**: Enter details in the following fields:  
+* **Name**: webserver-loadbalancer
+* **IP Address**: Leave empty for now
+* **Description**: Loadbalancer for our webservers
+* **Availability Zone**: Leave empty or choose an availability zone to your liking
+* **Flavor**: Choose a flavor to your liking for this tutorial we use the Medium flavor
+* **Subnet**: webserver-subnet
+
+**Step 4**: Proceed to the `Listener Details` tab by clicking on `Next`.  
+**Step 5**: Complete the following fields:  
+* **Name**: webserver-listener-https
+* **Description**: HTTPS Listener for our webservers
+* **Protocol**: TERMINATED HTTPS
+* **Protocol Port**: 443
+* **Admin State Up**: Yes
+Leave all others options as they are for now.
+
+**Step 6**: Proceed to the `Pool Details` tab by clicking on `Next`.  
+**Step 7**: Enter information in the following fields:  
+* **Create Pool**: Yes
+* **Name**: webserver-pool-http
+* **Description**: HTTP Pool for our webservers
+* **Algorithm**: Least connections
+* **Session Persistence**: Leave None
+* **TLS Enabled** No
+* **Admin State Up**: Yes
+> Note: Find out more about the `Algorithm` and `Session Persistence` fields in the article
+[Introduction into loadbalancers](
+{{ '/articles/introduction-into-loadbalancers' | relative_url }})
+
+
+
+**Step 8**: Proceed to the `Pool Members` tab by clicking on `Next`.  
+**Step 9**: Identify the instances you wish to include and click on `Add` for each.  
+**Step 10**: Enter the designated port for the host (80) and set the weight (1). Repeat this step
+for all webserver hosts you're adding.  
+> Note: In this tutorial, the connection from the load balancer to the webservers is not encrypted.
+The SSL encryption is hereby offloaded to the load balancer. If it is required to have an encrypted
+connection to the webservers, the webservers itself need an ssl certificate as well. This is outside
+of the scope for this tutorial. 
+
+**Step 11**: Navigate to the `Health Monitor` tab by clicking on `Next`.  
+**Step 12**: Complete the following fields:  
+* **Name**: webserver-healthmonitor-http
+* **Type**: HTTP
+* **Max Retries Down**: 3
+* **Delay**: 5
+* **Max Retries**: 3
+* **Timeout**: 5
+* **HTTP Method**: GET
+* **Excepted Codes**: 200
+* **URL Path**: /
+* **Admin State Up**: Yes
+
+**Step 13**: Proceed to the `SSL Certificates` tab by clicking on `Next`.  
+**Step 14**: Add the appropriate certificate from the available certificates. It will be named
+`DomainName_complete_certificate`
+> Note: It is possible to add multiple certificates. The load balancer will use SNI to select the
+appropriate certificate
+
+
+**Step 15**: Initiate the creation of your load balancer by clicking on `Create Load Balancer`.  
+**Step 16**: Locate the load balancer you've just set up and click the small arrow beside it. From
+the dropdown menu, select `Associate Floating IP`.  
+**Step 17**: Select an available floating IP or choose the net-float pool, then confirm your choice
+by clicking on `Associate`.  
+**Step 18**: Create an A record in DNS for the domain to point to the floating IP address
+[managing DNS records](
+{{ '/articles/managing-dns-records' | relative_url }})
+**Step 19**: Await the update of the load balancer's Operating Status to ONLINE and the DNS to
+propagate. Once this status is achieved, navigate to `https://DomainName` in your web browser to 
+witness your load balancer functioning.  
+
 
 Store the certificate in barbican
 ```bash
