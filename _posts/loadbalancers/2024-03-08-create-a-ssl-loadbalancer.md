@@ -50,12 +50,14 @@ refer to the
 ).
 
 **Step 2**
-
 Store the certificate in barbican
 ```bash
+# Store variables
 certificate=certificate.pem
 domain="$(openssl x509 -noout -subject -in "$certificate"|cut -d= -f 3| tr -d ' ')"
 name="${domain}_certificate"
+
+# Store the secret in keymanager
 openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' \
 --payload="$(base64 < "$certificate")" --expiration $(date --date="$(openssl x509 -enddate -noout \
 -in "$certificate"|cut -d= -f 2)" --iso-8601)
@@ -65,11 +67,14 @@ Make sure to save the returned secret_href as variable, we need that later
 certificate_url="https://keymanager.domain.tld:/v1/secrets/uuid"
 ```
 
-**Step 3**
+**Step 3**  
 Store the passhprase for the private key in barbican.
 
 ```bash
+# Store variables
 name="${domain}_passphrase"
+
+# Store the secret in keymanager
 openstack secret store --secret-type passphrase --name ${name} \
 --payload $(read -sp "Password: ";echo ${REPLY})
 ```
@@ -80,12 +85,15 @@ Make sure to save the returned secret_href as variable, we need that later
 passphrase_url="https://keymanager.domain.tld:/v1/secrets/uuid"
 ```
 
-**Step 4**
+**Step 4**  
 Store the private key in barbican
 
 ```bash
+# Store variables
 name="${domain}_private_key"
 certificate=private.key
+
+# Store the secret in keymanager
 openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' \
 --payload="$(base64 < "$certificate")"
 ```
@@ -94,12 +102,15 @@ Make sure to save the returned secret_href as variable, we need that later
 private_key_url="https://keymanager.domain.tld:/v1/secrets/uuid"
 ```
 
-**Step 5**
+**Step 5**  
 Store all intermediate certificates in barbican
 
 ```bash
+# Store variables
 certificate=intermediate.pem
 name="${domain}_intermediates"
+
+# Store the secret in keymanager
 openstack secret store --name="${name}" -t 'application/octet-stream' -e 'base64' \
 --payload="$(base64 < "$certificate")" --expiration $(date --date="$(openssl x509 -enddate -noout \
 -in "$certificate"|cut -d= -f 2)" --iso-8601)
@@ -109,12 +120,15 @@ Make sure to save the returned secret_href as variable, we need that later
 intermediates_url="https://keymanager.domain.tld:/v1/secrets/uuid"
 ```
 
-**Step 6**
+**Step 6**  
 Create a certificate container containing the certificate, all intermediates
 the passphrase and the private key.
 
 ```bash
+# Store variables
 name="${domain}_container"
+
+# Store the secret in keymanager
 openstack secret container create --name "${name}" --type certificate \
 -s "certificate=${certificate_url}" -s "intermediates=${intermediates_url}" \
 -s "private_key=${private_key_url}" -s "private_key_passphrase=${passphrase_url}"
@@ -135,7 +149,7 @@ load balancer on the OpenStack CLI server. The benefit is we can select the cert
 **Prerequisites**
  - The server certificate, intermediate certificates and private key are stored in the proper order in
 a single file on the OpenStack CLI server named 'certificate.pem'
- - openssl tooling installed on the OpenStack CLI server
+ - OpenSSL tooling installed on the OpenStack CLI server
 
 **Step 1**  
 First make sure you have setup the OpenStack CLI and that you are able to
@@ -154,7 +168,6 @@ openssl pkcs12 -export -inkey private.key -in certificate.pem -certfile intermed
 ```
 
 **Step 3**
-
 Store the certificate in barbican
 ```bash
 certificate=complete.p12
@@ -183,9 +196,12 @@ load balancer through the OpenStack Dashboard. Follow the step
 Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a
 healthmonitor.
 
-**Step 1**: Navigate to the `Network` tab and select `Load Balancers`.  
-**Step 2**: Initiate the process by clicking on the `Create Load Balancer` button.  
-**Step 3**: Enter details in the following fields:  
+**Ste  
+1**: Navigate to the `Network` tab and select `Load Balancers`.  
+**Step 2**  
+Initiate the process by clicking on the `Create Load Balancer` button.  
+**Step 3**  
+Enter details in the following fields:  
 * **Name**: webserver-loadbalancer
 * **IP Address**: Leave empty for now
 * **Description**: Loadbalancer for our webservers
@@ -193,8 +209,10 @@ healthmonitor.
 * **Flavor**: Choose a flavor to your liking for this tutorial we use the Medium flavor
 * **Subnet**: webserver-subnet
 
-**Step 4**: Proceed to the `Listener Details` tab by clicking on `Next`.  
-**Step 5**: Complete the following fields:  
+**Step 4**  
+Proceed to the `Listener Details` tab by clicking on `Next`.  
+**Step 5**  
+Complete the following fields:  
 * **Name**: webserver-listener-https
 * **Description**: HTTPS Listener for our webservers
 * **Protocol**: TERMINATED HTTPS
@@ -202,8 +220,10 @@ healthmonitor.
 * **Admin State Up**: Yes
 Leave all others options as they are for now.
 
-**Step 6**: Proceed to the `Pool Details` tab by clicking on `Next`.  
-**Step 7**: Enter information in the following fields:  
+**Step 6**  
+Proceed to the `Pool Details` tab by clicking on `Next`.  
+**Step 7**  
+Enter information in the following fields:  
 * **Create Pool**: Yes
 * **Name**: webserver-pool-http
 * **Description**: HTTP Pool for our webservers
@@ -217,17 +237,22 @@ Leave all others options as they are for now.
 
 
 
-**Step 8**: Proceed to the `Pool Members` tab by clicking on `Next`.  
-**Step 9**: Identify the instances you wish to include and click on `Add` for each.  
-**Step 10**: Enter the designated port for the host (80) and set the weight (1). Repeat this step
+**Step 8**  
+Proceed to the `Pool Members` tab by clicking on `Next`.  
+**Step 9**  
+Identify the instances you wish to include and click on `Add` for each.  
+**Step 10**  
+Enter the designated port for the host (80) and set the weight (1). Repeat this step
 for all webserver hosts you're adding.  
 > Note: In this tutorial, the connection from the load balancer to the webservers is not encrypted.
 The SSL encryption is hereby offloaded to the load balancer. If it is required to have an encrypted
 connection to the webservers, the webservers itself need an ssl certificate as well. This is outside
 of the scope for this tutorial. 
 
-**Step 11**: Navigate to the `Health Monitor` tab by clicking on `Next`.  
-**Step 12**: Complete the following fields:  
+**Step 11**  
+Navigate to the `Health Monitor` tab by clicking on `Next`.  
+**Step 12**  
+Complete the following fields:  
 * **Name**: webserver-healthmonitor-http
 * **Type**: HTTP
 * **Max Retries Down**: 3
@@ -239,20 +264,25 @@ of the scope for this tutorial.
 * **URL Path**: /
 * **Admin State Up**: Yes
 
-**Step 13**: Proceed to the `SSL Certificates` tab by clicking on `Next`.  
-**Step 14**: Add the appropriate certificate from the available certificates. It will be named
+**Step 13**  
+Proceed to the `SSL Certificates` tab by clicking on `Next`.  
+**Step 14**  
+Add the appropriate certificate from the available certificates. It will be named
 `DomainName_complete_certificate`
 > Note: It is possible to add multiple certificates. The load balancer will use SNI to select the
 appropriate certificate
 
 
-**Step 15**: Initiate the creation of your load balancer by clicking on `Create Load Balancer`.  
-**Step 16**: Locate the load balancer you've just set up and click the small arrow beside it. From
+**Step 15**  
+Initiate the creation of your load balancer by clicking on `Create Load Balancer`.  
+**Step 16**  
+Locate the load balancer you've just set up and click the small arrow beside it. From
 the dropdown menu, select `Associate Floating IP`.  
-**Step 17**: Select an available floating IP or choose the net-float pool, then confirm your choice
+**Step 17**  
+Select an available floating IP or choose the net-float pool, then confirm your choice
 by clicking on `Associate`.  
 
-**Step 18
+**Step 18**  
 Finalize the deployment and start testing
 ([Testing the loadbalancer](#testing-the-loadbalancer))
 
@@ -260,13 +290,12 @@ Finalize the deployment and start testing
 Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a
 healthmonitor. It is only possible to create the loadbalancer through 
 
-**Prerequisites**
+**Prerequisites**  
 We should already have a bash variable set with the certificate location
 ```bash
 octavia_certificate_url="https://keymanager.domain.tld:/v1/containers/uuid"
 ```
 **Step 1**
-
 Gather the subnet uuid for the internal network:
 ```bash
 openstack subnet list
@@ -274,7 +303,6 @@ vip_subnet_uuid="uuid"
 ```
 
 **Step 2**
-
 Create the loadbalancer
 ```bash
 openstack loadbalancer create --name "webserver-loadbalancer" \
@@ -299,7 +327,6 @@ listener_uuid=uuid
 ```
 
 **Step 4**
-
 Create the pool
 
 ```bash
@@ -313,19 +340,15 @@ pool_uuid="uuid"
 ```
 
 
-**Step 5**
-
-
+**Step 5**  
 Create the health monitor
 
 ```bash
 openstack loadbalancer healthmonitor create "${pool_uuid}" --name "webserver-healthmonitor-http" \
 --type HTTP --delay 5 --timeout 5 --max-retries 3
-
 ```
 
-**Step 6**
-
+**Step 6**  
 Create the members
 
 repeat the following command for all webservers you want to add to the pool
@@ -342,19 +365,22 @@ Finalize the deployment and start testing
 
 ---
 
-## Testing the loadbalancer.
+## Testing the loadbalancer.  
 Now that the load balancer is created, we can test it
 
-**Step 1**: Create an A record in DNS for the domain to point to the floating IP address
+**Step 1**  
+Create an A record in DNS for the domain to point to the floating IP address
 [managing DNS records](
 {{ '/articles/managing-dns-records' | relative_url }})
 
 
-**Step 2**: Await the update of the load balancer's Operating Status to ONLINE and the DNS to
+**Step 2**  
+Await the update of the load balancer's Operating Status to ONLINE and the DNS to
 propagate. Once this status is achieved, navigate to `https://DomainName` in your web browser to 
 witness your load balancer functioning.  
 
-**Step 3**: Verify the SSL of the load balancer to have your URL checked with the   
+**Step 3**  
+Verify the SSL of the load balancer to have your URL checked with the   
 [SSL Labs SSL Server Test](https://www.ssllabs.com/ssltest/analyze.html)
 
 If you want to customize your Loadbalancer even further we highly recommend you to read the 
