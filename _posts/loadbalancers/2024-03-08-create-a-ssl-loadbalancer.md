@@ -205,8 +205,8 @@ Enter details in the following fields:
 * **Name**: webserver-loadbalancer
 * **IP Address**: Leave empty for now
 * **Description**: Loadbalancer for our webservers
-* **Availability Zone**: Leave empty or choose an availability zone to your liking
-* **Flavor**: Choose a flavor to your liking for this tutorial we use the Medium flavor
+* **Availability Zone**: Leave empty or choose an availability zone to your liking.
+* **Flavor**: Choose a flavor to your liking for this tutorial we use the Medium flavor.
 * **Subnet**: webserver-subnet
 
 **Step 4**  
