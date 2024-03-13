@@ -299,7 +299,7 @@ octavia_certificate_url="https://keymanager.domain.tld:/v1/containers/uuid"
 Gather the subnet uuid for the internal network:
 ```bash
 openstack subnet list
-vip_subnet_uuid="uuid"
+vip_subnet_uuid=uuid
 ```
 
 **Step 2**  
@@ -336,7 +336,7 @@ openstack loadbalancer pool create --name "webserver-pool-http" \
 ```
 Make sure to save the returned `id` as variable, we need that later
 ```bash
-pool_uuid="uuid"
+pool_uuid=uuid
 ```
 
 
