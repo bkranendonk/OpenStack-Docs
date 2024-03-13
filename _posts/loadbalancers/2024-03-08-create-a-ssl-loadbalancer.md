@@ -49,7 +49,7 @@ refer to the
     {{ '/articles/using-the-cli-linux' | relative_url }}
 ).
 
-**Step 2**
+**Step 2**  
 Store the certificate in barbican
 ```bash
 # Store variables
