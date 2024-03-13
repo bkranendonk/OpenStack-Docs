@@ -159,7 +159,7 @@ refer to the
     {{ '/articles/using-the-cli-linux' | relative_url }}
 ).
 
-**Step 2**
+**Step 2**  
 Convert the certificates to a pkcs12 certificate (skip this if you already have a pkcs12 encoded
 file with all required certificates):
 ```bash
@@ -167,7 +167,7 @@ openssl pkcs12 -export -inkey private.key -in certificate.pem -certfile intermed
 -passout pass: -out complete.p12
 ```
 
-**Step 3**
+**Step 3**  
 Store the certificate in barbican
 ```bash
 certificate=complete.p12
@@ -196,8 +196,8 @@ load balancer through the OpenStack Dashboard. Follow the step
 Now we can create the loadbalancer. We will create a loadbalancer with a listener, a pool and a
 healthmonitor.
 
-**Ste  
-1**: Navigate to the `Network` tab and select `Load Balancers`.  
+**Step 1**  
+Navigate to the `Network` tab and select `Load Balancers`.  
 **Step 2**  
 Initiate the process by clicking on the `Create Load Balancer` button.  
 **Step 3**  
