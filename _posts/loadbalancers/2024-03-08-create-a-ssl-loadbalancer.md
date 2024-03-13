@@ -295,14 +295,14 @@ We should already have a bash variable set with the certificate location
 ```bash
 octavia_certificate_url="https://keymanager.domain.tld:/v1/containers/uuid"
 ```
-**Step 1**
+**Step 1**  
 Gather the subnet uuid for the internal network:
 ```bash
 openstack subnet list
 vip_subnet_uuid="uuid"
 ```
 
-**Step 2**
+**Step 2**  
 Create the loadbalancer
 ```bash
 openstack loadbalancer create --name "webserver-loadbalancer" \
@@ -313,7 +313,7 @@ Make sure to save the returned `id` as variable, we need that later
 lb_uuid=uuid
 ```
 
-**Step 3**
+**Step 3**  
 Create the listener
 ```bash
 openstack loadbalancer listener create "${lb_uuid}" --name "webserver-listener-https" \
@@ -326,7 +326,7 @@ Make sure to save the returned `id` as variable, we need that later
 listener_uuid=uuid
 ```
 
-**Step 4**
+**Step 4**  
 Create the pool
 
 ```bash
@@ -358,7 +358,7 @@ openstack loadbalancer member create "${pool_uuid}" --protocol-port 80 --name "<
 --address "<server_address>"
 ```
 
-**Step 7**
+**Step 7**  
 Finalize the deployment and start testing
 ([Testing the loadbalancer](#testing-the-loadbalancer))
 
