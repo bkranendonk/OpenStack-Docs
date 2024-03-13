@@ -354,6 +354,8 @@ Now that the load balancer is created, we can test it
 propagate. Once this status is achieved, navigate to `https://DomainName` in your web browser to 
 witness your load balancer functioning.  
 
+**Step 3**: Verify the SSL of the load balancer to have your URL checked with the   
+[SSL Labs SSL Server Test](https://www.ssllabs.com/ssltest/analyze.html)
 
 If you want to customize your Loadbalancer even further we highly recommend you to read the 
 [OpenStack Octavia Loadbalancer documentation](https://docs.openstack.org/octavia/latest/user/index.html)
