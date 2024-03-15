@@ -32,6 +32,10 @@ Click on `RESTORE BACKUP` next to the backup you want to restore.
 If you want to restore the backup to a new volume then select the
 `CREATE A NEW VOLUME` option and click on `Restore Backup`.
 
+> Note: If you are trying to restore an encrypted backup we recommend first
+> creating a new volume with the `encrypted` volume type and then restoring
+> the backup to the new volume. (See step 4b)
+
 **Step 4b (Restoring to an existing volume)**  
 Select the volume you want to restore the backup to and click on `Restore
 Backup`.
