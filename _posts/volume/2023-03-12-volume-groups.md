@@ -95,7 +95,7 @@ Now we will create the volume group, make sure to replace the `<group-type>`,
 `<availability-zone>`, `<volume-type>` and `<group-name>` with the correct
 values.
 ```bash
-openstack volume group create --os-volume-api-version 3.51 --volume-group-type <group-type> --availability-zone <availability-zone> --volume-type <volume-type> <group-name>
+openstack volume group create --os-volume-api-version 3.51 --volume-group-type <group-type> --availability-zone <availability-zone> --volume-type <volume-type> --name <group-name>
 ```
 
 > Note: If you do not know which availability zones are available you can use
@@ -329,4 +329,4 @@ individually.
 You can find the OpenStack Snapshot in the OpenStack Dashboard by going to the
 `VOLUMES` section and then clicking on `Snapshots`.
 
-<!-- TODO: Add a link to a snapshot restore article >
+<!-- TODO: Add a link to a snapshot restore article -->
