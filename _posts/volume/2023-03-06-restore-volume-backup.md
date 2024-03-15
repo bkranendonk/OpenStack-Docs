@@ -36,6 +36,9 @@ If you want to restore the backup to a new volume then select the
 Select the volume you want to restore the backup to and click on `Restore
 Backup`.
 
+> Note: If you are trying to restore an encrypted backup make sure to use an
+> encrypted volume type like `nvme-encrypted` when restoring the backup.
+
 ---
 
 ## Using the OpenStack CLI
@@ -83,6 +86,10 @@ openstack volume create --os-volume-api-version 3.47 --size 10 --backup <backup_
 
 A new volume will now be created with the data from the backup.
 
+> Note: If you are restoring an backup of an encrypted volume make sure
+> to use an encrypted volume type like `nvme-encrypted` when restoring the
+> backup. You can do this by adding the  `--type <volume-type>` argument.
+
 > Note: In older versions of the OpenStack the `--os-volume-api-version 3.47`
 option might not work, in this case you need to create a new volume and then
 restore the backup to the new volume using the instructions in the
@@ -123,8 +130,16 @@ openstack volume backup list
 Now that we have the ID of the backup and the volume where we want to restore
 the backup to we can execute the following command to restore the backup.
 ```bash
-openstack volume backup restore <backup_id> <volume_id>
+openstack volume backup restore <backup_id> <volume_id> --force
 ```
+
+> Warning: The `--force` option will overwrite the data on the volume with the
+> data from the backup. Make sure you have a backup of the data on the volume
+> before restoring the backup incase you made a mistake and overwrite
+> something important.
+
+> Note: If you are trying to restore an encrypted backup make sure to use an
+> encrypted volume type like `nvme-encrypted` when restoring the backup.
 
 ---
 
