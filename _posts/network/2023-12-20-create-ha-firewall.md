@@ -10,7 +10,7 @@ By default it is possible to create an OpenStack router that has an external IP 
 To gain more control over the traffic to the internet, create VPN connectivity and allow for more fine-graned security policy's, 
 it is possible to create an instance or multiple instances to replace the OpenStack router on an internal network 
 This tutorial guides you through the process of creating instances, and configure OpenStack to allow proper routing and HA IP.
-The tutorial does not include configuring the firewall and  
+The tutorial does not include configuring the firewall.  
 
 ## Requirements
 * A public IPv4 subnet where you can set allowed address pairs with at least three available IP addresses 
