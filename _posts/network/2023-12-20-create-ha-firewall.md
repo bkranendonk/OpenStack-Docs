@@ -15,7 +15,7 @@ The tutorial does not include configuring the firewall.
 ## Requirements
 * A public IPv4 subnet where you can set allowed address pairs with at least three available IP addresses 
   * For example [Rent an IPv4 range]({{ '/articles/create-byoip-network' | relative_url }})
-* An internal network without a router and with at least three available IP addresses (Named `routed` in this tutorial)
+* An internal network without a router and with at least three available IP addresses (The router is named `OpenStack-internal-router` in this tutorial)
   * [Create an internal network]({{ '/articles/create-an-internal-network' | relative_url }})
 * A Firewall image in OpenStack (for example OPNsense AMD64 nano image from https://opnsense.org/download/)  
 
@@ -83,7 +83,7 @@ Install the firewall instances to your liking, but at least configure the follow
 
 ## Configure routing on the subnet
 
-* Go to network &gt; networks and navigate to network `routed`
+* Go to network &gt; networks and navigate to network `OpenStack-internal-router`
 * Go to subnets and click `Edit subnet` for the subnet
 * Navigate to `Subnet Details`
   * ![Configure host route]({{ '/assets/images/2023-12-20-create-ha-firewall/configure_host_route.png' | relative_url }})
