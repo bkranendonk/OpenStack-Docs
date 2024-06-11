@@ -57,4 +57,4 @@ Press **Create Router**.
 * **Subnet**: internal-network (internal-subnet)
 * **IP Address**: Leave empty for now
 
-**Step 8**: Click on **Add Interface** to add the interface.  
+**Step 8**: Click on **Submit** to add the interface.  
