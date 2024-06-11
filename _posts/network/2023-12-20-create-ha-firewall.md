@@ -32,10 +32,10 @@ The tutorial does not include configuring the firewall.
 Adjust the DHCP allocation pool to provide at least one IP addres for the Virtual IP of the firewall cluster (in this example 10.10.50.254)  
 
 **Step 1**: Log in to the OpenStack dashboard and proceed to the `Network` tab.   
-**Step 2**: Select `Networks` and then select your internal network  
-**Step 3**: Select `Subnets` and click `Edit Subnet` on the subnet where your Virtual IP should live  
-**Step 4**: Go to `Subnet Details` and modify the `Allocation Pools` to remove 10.10.50.254 from the allocation pool  
-**Step 5**: Click `Save`  
+**Step 2**: Select `Networks` and then select your internal network.  
+**Step 3**: Select `Subnets` and click `Edit Subnet` on the subnet where your Virtual IP should live.  
+**Step 4**: Go to `Subnet Details` and modify the `Allocation Pools` to remove 10.10.50.254 from the allocation pool.  
+**Step 5**: Click `Save`.  
 
 Repeat the same process for the rented IP range
 
