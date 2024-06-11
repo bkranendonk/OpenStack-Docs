@@ -35,7 +35,7 @@ Adjust the DHCP allocation pool to provide at least one IP addres for the Virtua
 **Step 2**: Select `Networks` and then select your internal network.  
 **Step 3**: Select `Subnets` and click `Edit Subnet` on the subnet where your Virtual IP should live.  
 **Step 4**: Go to `Subnet Details` and modify the `Allocation Pools` to remove 10.10.50.254 from the allocation pool.  
-**Step 5**: Click `Save`.  
+**Step 5**: Click on `Save`.  
 
 Repeat the same process for the rented IP range
 
