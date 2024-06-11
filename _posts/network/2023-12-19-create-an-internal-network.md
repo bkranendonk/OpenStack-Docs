@@ -32,7 +32,7 @@ However, feel free to assign a name of your choice to the network.
 * **Gateway IP**: 10.0.0.1
 * **Disable Gateway**: Should be unmarked
 
-**Step 5**: Navigate to `Subnet Details`and fill in the following information:  
+**Step 5**: Navigate to `Subnet Details` and fill in the following information:  
 * **DHCP Enabled**: Ensure this option is marked.  
 
 Leave all other fields blank, then click on `Create`.  
