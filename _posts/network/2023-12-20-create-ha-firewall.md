@@ -83,7 +83,7 @@ Install the firewall instances to your liking, but at least configure the follow
 
 ## Configure routing on the subnet
 
-* Go to network &gt; networks and navigate to network `OpenStack-internal-router`
+* Go to network &gt; networks and navigate to network `internal-network`
 * Go to subnets and click `Edit subnet` for the subnet
 * Navigate to `Subnet Details`
   * ![Configure host route]({{ '/assets/images/2023-12-20-create-ha-firewall/configure_host_route.png' | relative_url }})
