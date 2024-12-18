@@ -23,7 +23,7 @@
 }
 
 .navbar-with-sidebar {
-  width: calc(100vw - 280px);
+  width: 100%;
   transition: all 0.3s;
 }
 
