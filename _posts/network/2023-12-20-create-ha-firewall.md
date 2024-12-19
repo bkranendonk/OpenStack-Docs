@@ -15,7 +15,7 @@ The tutorial does not include configuring the firewall.
 ## Requirements
 * A public IPv4 subnet where you can set allowed address pairs with at least three available IP addresses 
   * For example [Rent an IPv4 range]({{ '/articles/create-byoip-network' | relative_url }})
-* An internal network without a router and with at least three available IP addresses (Named `routed` in this tutorial)
+* An internal network without a router and with at least three available IP addresses (Named `internal-network` in this tutorial)
   * [Create an internal network]({{ '/articles/create-an-internal-network' | relative_url }})
 * A Firewall image in OpenStack (for example OPNsense AMD64 nano image from https://opnsense.org/download/)  
 
@@ -32,10 +32,10 @@ The tutorial does not include configuring the firewall.
 Adjust the DHCP allocation pool to provide at least one IP addres for the Virtual IP of the firewall cluster (in this example 10.10.50.254)  
 
 **Step 1**: Log in to the OpenStack dashboard and proceed to the `Network` tab.   
-**Step 2**: Select `Networks` and then select your internal network  
-**Step 3**: Select `Subnets` and click `Edit Subnet` on the subnet where your Virtual IP should live  
-**Step 4**: Go to `Subnet Details` and modify the `Allocation Pools` to remove 10.10.50.254 from the allocation pool  
-**Step 5**: Click `Save`  
+**Step 2**: Select `Networks` and then select your internal network.  
+**Step 3**: Select `Subnets` and click `Edit Subnet` on the subnet where your Virtual IP should live.  
+**Step 4**: Go to `Subnet Details` and modify the `Allocation Pools` to remove 10.10.50.254 from the allocation pool.  
+**Step 5**: Click on `Save`.  
 
 Repeat the same process for the rented IP range
 
@@ -83,7 +83,7 @@ Install the firewall instances to your liking, but at least configure the follow
 
 ## Configure routing on the subnet
 
-* Go to network &gt; networks and navigate to network `routed`
+* Go to network &gt; networks and navigate to network `internal-network`
 * Go to subnets and click `Edit subnet` for the subnet
 * Navigate to `Subnet Details`
   * ![Configure host route]({{ '/assets/images/2023-12-20-create-ha-firewall/configure_host_route.png' | relative_url }})
