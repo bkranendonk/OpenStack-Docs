@@ -22,11 +22,6 @@
   transition: all 0.3s;
 }
 
-.navbar-with-sidebar {
-  width: calc(100vw - 280px);
-  transition: all 0.3s;
-}
-
 @media (max-width: 991px) {
   #sidebar {
     margin-left: -280px;
