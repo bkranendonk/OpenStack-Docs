@@ -15,7 +15,7 @@ The tutorial does not include configuring the firewall.
 ## Requirements
 * A public IPv4 subnet where you can set allowed address pairs with at least three available IP addresses 
   * For example [Rent an IPv4 range]({{ '/articles/create-byoip-network' | relative_url }})
-* An internal network without a router and with at least three available IP addresses (is named `internal-network` in this tutorial)
+* An internal network without a router and with at least three available IP addresses (Named `internal-network` in this tutorial)
   * [Create an internal network]({{ '/articles/create-an-internal-network' | relative_url }})
 * A Firewall image in OpenStack (for example OPNsense AMD64 nano image from https://opnsense.org/download/)  
 
