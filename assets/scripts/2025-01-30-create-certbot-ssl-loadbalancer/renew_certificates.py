@@ -356,7 +356,6 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
                     )
                     print(f"Falling back to sni listener update")
                     self.args.octavia_sni_listener.append(listener_id)
-                    self.update_octavia_sni_listener(certificate_url)
                     continue
 
             print(f"Updating listener {listener.name} with new certificate")
