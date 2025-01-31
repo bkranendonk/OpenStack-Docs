@@ -161,6 +161,7 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
         return self._conn
 
     def renew_certificate(self):
+        """Function to renew the certificate using certbot"""
         if self.args.renew and not self.args.key_path:
             print(f"Renewing domain: {self.domain} with certbot")
             # check for the version of certbot
@@ -200,6 +201,7 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
                 certbot.main.main(certbot_args)
 
     def get_used_certificates(self):
+        """Function to get the certificates used in all Octavia listeners"""
         conn = self.get_connection()
         used_certificates = []
         for listener in conn.load_balancer.listeners():
@@ -210,6 +212,7 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
         return used_certificates
 
     def cleanup_barbican(self):
+        """Function to cleanup expired certificates in Barbican that are not in use"""
         used_certificates = self.get_used_certificates()
         today = datetime.now()
         conn = self.get_connection()
@@ -233,13 +236,14 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
                 else:
                     print(f"Certificate {certificate.name} is not expired")
 
-    def get_cert_from_p12(self, certificate_data):
-        # get the certificate from pkcs12 certificate binary data
+    def get_cert_from_p12(self, certificate_data) -> object:
+        """Get the certificate from pkcs12 certificate binary data"""
         secret_payload = pkcs12.load_pkcs12(certificate_data, password=None)
         cert = secret_payload.cert.certificate
         return cert
 
-    def get_cert_from_barbican(self, certificate_url):
+    def get_cert_from_barbican(self, certificate_url) -> object:
+        """Function to get the certificate from Barbican using the certificate URL"""
         conn = self.get_connection()
         certificate_id = certificate_url.split("/")[-1]
         secret = conn.key_manager.get_secret(certificate_id)
@@ -258,6 +262,7 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
         return cert_obj
 
     def create_pkcs12_file(self, dest_path):
+        """Function to create a pkcs12 file from the certificate and private key"""
         with open(self.privkey_path, "rb") as key_file, open(
             self.fullchain_path, "rb"
         ) as cert_file:
@@ -290,6 +295,7 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
         return certificate
 
     def get_existing_secret(self, name) -> str:
+        """Function to get the existing certificate from Barbican if it exists"""
         conn = self.get_connection()
         if self.args.force_reupload:
             return None
@@ -326,6 +332,7 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
         return self.certificate_url
 
     def update_octavia_listener(self, certificate_url):
+        """Function to update the Octavia listener with the new certificate"""
         conn = self.get_connection()
         for listener_id in self.args.octavia_listener:
             listener = conn.load_balancer.get_listener(listener_id)
@@ -364,6 +371,7 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
             )
 
     def update_octavia_sni_listener(self, certificate_url):
+        """Function to update the Octavia SNI listener with the new certificate"""
         conn = self.get_connection()
         print(
             f"Updating SNI listeners with new certificate{self.args.octavia_sni_listener}"
@@ -390,6 +398,7 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
             )
 
     def cleanup_octavia_sni(self):
+        """Function to cleanup replaced SNI certificates in Octavia"""
         conn = self.get_connection()
         for listener in conn.load_balancer.listeners():
             if not listener.sni_container_refs:
