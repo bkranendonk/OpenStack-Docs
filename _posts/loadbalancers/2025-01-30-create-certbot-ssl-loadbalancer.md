@@ -56,7 +56,7 @@ rm requirements_certbot_dns_openstack.txt
 **Step 3**  
 Download and evaluate the script from cloudtutorials. 
 ```bash
-sudo wget -O /root/renew_certificates.py https://raw.githubusercontent.com/RobertJansen1/OpenStack-Docs/refs/heads/main/assets/scripts/2025-01-30-create-certbot-ssl-loadbalancer/renew_certificates.py
+sudo wget -O /root/renew_certificates.py https://raw.githubusercontent.com/CloudTutorials/OpenStack-Docs/refs/heads/main/assets/scripts/2025-01-30-create-certbot-ssl-loadbalancer/renew_certificates.py
 sudo less /root/renew_certificates.py
 sudo python3 /root/renew_certificates.py --help
 ```
