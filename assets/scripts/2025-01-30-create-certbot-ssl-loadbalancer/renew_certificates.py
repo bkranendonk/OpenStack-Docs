@@ -11,105 +11,8 @@ import certbot.main
 
 
 class CertificateRenewer:
-    def __init__(self):
-        # Parse command line arguments
-        parser = argparse.ArgumentParser(
-            description="""
-Licensed under the Apache License, Version 2.0 (the "License")
-Version 1.0 (2025-01-30)
-This script is used to renew the OpenStack certificate using certbot and upload it to Barbican.
-It also updates the Octavia listener with the new certificate.
-
-Depends on clouds.yaml for OpenStack credentials, and certbot-dns-openstack plugin for DNS challenge.
-The script will use the certbot-dns-openstack plugin to authenticate the domain ownership and renew the certificate.
-It assumes that the certificate is stored in /etc/letsencrypt/live/<domain>/ directory.
-It depends on OpenStack designate for DNS challenge, and OpenStack Barbican for storing the certificate.
-DNS for the domain needs to be configured for the domain to use the OpenStack DNS service.
-
-"""
-        )
-        parser.add_argument(
-            "--domain",
-            default=None,
-            help="The domain for which to renew the certificate. Multi domain is currently not supported, wildcard domain is supported",
-        )
-        parser.add_argument(
-            "--os-cloud",
-            help="OpenStack cloud name",
-        )
-        parser.add_argument(
-            "--renew",
-            action="store_true",
-            help="Enable certbot renewal, if not set, the script will search for certificates to use in Barbican and update Octavia listener",
-        )
-        parser.add_argument(
-            "--force-renewal",
-            action="store_true",
-            help="Force renewal of certificate with certbot even if expiration date is not near",
-        )
-        parser.add_argument(
-            "--email",
-            help="Email address for certbot",
-        )
-        parser.add_argument(
-            "--create-barbican-secret",
-            action="store_true",
-            help="Upload the certificate to Barbican if the certificate is not already uploaded (based on subject, '_full_cert_expiring_' and expiration date)",
-        )
-        parser.add_argument(
-            "--octavia-listener",
-            nargs="+",
-            default=[],
-            help="Add all listener IDs to update with new certificate (will fallback to SNI listener update if certificate subject mismatch, use --force-rename to force update)",
-        )
-        parser.add_argument(
-            "--octavia-sni-listener",
-            nargs="+",
-            default=[],
-            help="Add all SNI listener IDs to update with new certificate",
-        )
-        parser.add_argument(
-            "--force-reupload",
-            action="store_true",
-            help="Force re-uploading certificate to Barbican, will update Barbican with the certificate even if it already exists",
-        )
-        parser.add_argument(
-            "--force-rename",
-            action="store_true",
-            help="Force changing hostname in octavia",
-        )
-        parser.add_argument(
-            "--cleanup-barbican",
-            action="store_true",
-            help="Cleanup old certificates in Barbican",
-        )
-        parser.add_argument(
-            "--cleanup-sni",
-            action="store_true",
-            help="Cleanup old SNI certificates in Octavia",
-        )
-        parser.add_argument(
-            "--key-path",
-            default=None,
-            help="Path to the key file to manually upload the certificate",
-        )
-        parser.add_argument(
-            "--chain-path",
-            default=None,
-            help="Path to the chain file to manually upload the certificate",
-        )
-        parser.add_argument(
-            "--fullchain-path",
-            default=None,
-            help="Path to the fullchain file to manually upload the certificate",
-        )
-        parser.add_argument(
-            "--p12-path",
-            default=None,
-            help="Path to the p12 file to manually upload the certificate",
-        )
-
-        self.args = parser.parse_args()
+    def __init__(self, args):
+        self.args = args
         if not self.args.os_cloud:
             self.args.os_cloud = os.environ.get("OS_CLOUD", None)
             if not self.args.os_cloud:
@@ -493,5 +396,103 @@ DNS for the domain needs to be configured for the domain to use the OpenStack DN
 
 
 if __name__ == "__main__":
-    renewer = CertificateRenewer()
+    # Parse command line arguments
+    parser = argparse.ArgumentParser(
+        description="""
+Licensed under the Apache License, Version 2.0 (the "License")
+Version 1.0 (2025-01-30)
+This script is used to renew the OpenStack certificate using certbot and upload it to Barbican.
+It also updates the Octavia listener with the new certificate.
+
+Depends on clouds.yaml for OpenStack credentials, and certbot-dns-openstack plugin for DNS challenge.
+The script will use the certbot-dns-openstack plugin to authenticate the domain ownership and renew the certificate.
+It assumes that the certificate is stored in /etc/letsencrypt/live/<domain>/ directory.
+It depends on OpenStack designate for DNS challenge, and OpenStack Barbican for storing the certificate.
+DNS for the domain needs to be configured for the domain to use the OpenStack DNS service.
+
+"""
+    )
+    parser.add_argument(
+        "--domain",
+        default=None,
+        help="The domain for which to renew the certificate. Multi domain is currently not supported, wildcard domain is supported",
+    )
+    parser.add_argument(
+        "--os-cloud",
+        help="OpenStack cloud name",
+    )
+    parser.add_argument(
+        "--renew",
+        action="store_true",
+        help="Enable certbot renewal, if not set, the script will search for certificates to use in Barbican and update Octavia listener",
+    )
+    parser.add_argument(
+        "--force-renewal",
+        action="store_true",
+        help="Force renewal of certificate with certbot even if expiration date is not near",
+    )
+    parser.add_argument(
+        "--email",
+        help="Email address for certbot",
+    )
+    parser.add_argument(
+        "--create-barbican-secret",
+        action="store_true",
+        help="Upload the certificate to Barbican if the certificate is not already uploaded (based on subject, '_full_cert_expiring_' and expiration date)",
+    )
+    parser.add_argument(
+        "--octavia-listener",
+        nargs="+",
+        default=[],
+        help="Add all listener IDs to update with new certificate (will fallback to SNI listener update if certificate subject mismatch, use --force-rename to force update)",
+    )
+    parser.add_argument(
+        "--octavia-sni-listener",
+        nargs="+",
+        default=[],
+        help="Add all SNI listener IDs to update with new certificate",
+    )
+    parser.add_argument(
+        "--force-reupload",
+        action="store_true",
+        help="Force re-uploading certificate to Barbican, will update Barbican with the certificate even if it already exists",
+    )
+    parser.add_argument(
+        "--force-rename",
+        action="store_true",
+        help="Force changing hostname in octavia",
+    )
+    parser.add_argument(
+        "--cleanup-barbican",
+        action="store_true",
+        help="Cleanup old certificates in Barbican",
+    )
+    parser.add_argument(
+        "--cleanup-sni",
+        action="store_true",
+        help="Cleanup old SNI certificates in Octavia",
+    )
+    parser.add_argument(
+        "--key-path",
+        default=None,
+        help="Path to the key file to manually upload the certificate",
+    )
+    parser.add_argument(
+        "--chain-path",
+        default=None,
+        help="Path to the chain file to manually upload the certificate",
+    )
+    parser.add_argument(
+        "--fullchain-path",
+        default=None,
+        help="Path to the fullchain file to manually upload the certificate",
+    )
+    parser.add_argument(
+        "--p12-path",
+        default=None,
+        help="Path to the p12 file to manually upload the certificate",
+    )
+
+    args = parser.parse_args()
+    renewer = CertificateRenewer(args)
     renewer.run()
