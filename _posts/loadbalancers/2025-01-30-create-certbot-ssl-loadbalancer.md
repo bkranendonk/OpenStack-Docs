@@ -50,11 +50,9 @@ sudo pip install openstacksdk cryptography certbot git+https://opendev.org/x/cer
 ```
 
 **Step 3**  
-Download and evaluate the script from cloudtutorials. 
+Download the script from cloudtutorials. We recommend you reading the script before executing, this is always good practice.
 ```bash
 sudo wget -O /root/renew_certificates.py https://raw.githubusercontent.com/CloudTutorials/OpenStack-Docs/refs/heads/main/assets/scripts/2025-01-30-create-certbot-ssl-loadbalancer/renew_certificates.py
-sudo cat /root/renew_certificates.py
-sudo python3 /root/renew_certificates.py --help
 ```
  
 **Step 4** 
