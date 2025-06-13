@@ -103,7 +103,7 @@ To run the MkDocs site locally for testing:
 pip install -r requirements.txt
 ```
 
-**Start the development server**
+**Start the development server  **
 ```bash
 mkdocs serve
 ```
