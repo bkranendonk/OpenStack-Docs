@@ -1,112 +1,114 @@
-# Creating a new article?
-At first you need to create a new branch with the name of the article.
-`git checkout -b <article>`
+# OpenStack Documentation Guide
 
-Then you create a new file with the name of the article and the extension .md
-in the _posts.md directory. the name of the .md file should be in the following
- format: `<year>-<month>-<day>-<article-name>.md`.  
+A comprehensive guide for creating and managing documentation using MkDocs.
 
-Please try to create a sub directory with the category of the article and place
- the article in there like `_posts/compute/2023-12-19-create-an-instance.md`.  
+## Getting Started
 
-The contents of the file should have the following structure:
+### Creating a New Article
 
+**Create a new branch**
+```bash
+git checkout -b <article-name>
 ```
----
-layout: page
-tags: [<tags>]
-page_title: <Page title>
----
 
-<Here you should place the content of your article>
-```
-- The **layout** should be **page**, this is the default layout for all pages
-exept for the homepage of the site.
-- The **tags** are used to filter the articles in the sidebar they should
-represent the category directory they are in.
-- The **page_title** is the title in the sidebar and the title at the top of
-the article.  
+**Create the article file**
+- Navigate to the `docs/` directory
+- Create a new `.md` file following this naming convention: `<year>-<month>-<day>-<article-name>.md`
+- Place the file in the appropriate category subdirectory: `docs/compute/2023-12-19-create-an-instance.md`
 
-Please note that all articles should be written in English.
+### Article Structure
 
-## Styling of the article
-We use .md files for the articles the styling is done with markdown.
-You can find a good tutorial here:
-[Markdown Tutorial](https://guides.github.com/features/mastering-markdown/).
+Create your article using standard Markdown formatting:
 
-### Text line length
-Please try to keep the line length of the text to a maximum of 79 characters.
-This is to make sure the text is readable on all devices. When publishing the
-site the text will be placed as if the 79 character limit is not there.
-
-
-### Adding Hyperlinks
-Hyperlinks are an amazing tool to reference other articles or external pages.
-Within cloudtutorials we split up hyperlinks into two categories: 
-- Hyperlink to local page/article
-- Hyperlink to external page
-
-Whenever you want to create an hyperlink which needs to be opened in a new tab
-you need to add the following code to the hyperlink:
 ```markdown
-[<link-text>](<link-url>){:target="_blank"}
+# Article Title
+
+Your article content goes here using standard markdown syntax.
 ```
 
-#### Hyperlink to local page/article
-To add a hyperlink an article on the same site you need to use the following
-code, the relative_url filter is used
-to make sure the link is correct when the site is published both on the main
-site and on potential forks in the future:
+**Guidelines:**
+- Use standard Markdown formatting (no special front matter required)
+- Organize content with appropriate headers (`#`, `##`, `###`, etc.)
+- All articles must be written in English
+
+## Writing Guidelines
+
+### Text Formatting
+- Use standard Markdown for all styling
+- Keep line length to 79 characters maximum for readability
+- The 79-character limit is for editing only—publishing removes this constraint
+
+### Hyperlinks
+
+**Internal Links (Same Site)**
 ```markdown
-[<link-text>]({{ '<link-url>' | relative_url }})
+[Link Text](../path/to/page.md)
 ```
 
-#### Hyperlink to external page
-To add a hyperlink to an external page you need to use the following code, in
-this case the relative_url is not needed:
+**External Links**
 ```markdown
-[<link-text>](<link-url>)
+[Link Text](https://external-site.com)
 ```
 
+### Images
 
-### Adding images
-To add images to the article you need to place the image in the assets/images
-folder.
-Please create a sub directory with the name of the article and place the images
-in there.
-Then you can add the image to the article with the following code:
+**File Organization**
+- Place images in `docs/assets/images/<article-name>/`
+- Create a subdirectory for each article
+
+**Image Syntax**
 ```markdown
-<img class="rounded border border-dark" src="{{ '/assets/images/<article-name>/<image-name>' | relative_url }}" width="auto" height="400" />
+![Alt text](../assets/images/<article-name>/<image-name>)
 ```
 
-# Review process
-After you have created the article you need to create a pull request. if you
-are not done editing yet you can create a draft pull request. Within the draft
-pull request you can ask for feedback.
+## Review Process
 
-One of the approved community members will review the article and give you
-feedback where needed. if the article is good to go it will be merged into
-the main branch and will be published on the site.
+### Submitting Articles
 
-## Reviewing an article
-When reviewing an articles the following things should be checked:
-- Is the article complete?
-- Is the article correct?
-- Is the article in the correct category?
-- Is the article in the correct directory?
-- Is the article in the correct format?
-- Is the article in the correct language?
-- Is the article in the correct styling?
-- Are the hyperlinks correct?
-- Are the linked media files correct? (images, videos, etc.)
+1. Create a Pull Request after completing your article
+2. Draft PRs are welcome for feedback during development
+3. Request review from approved community members
 
-If the article is not correct please give feedback to the author of the article
-in the pull request.
-If the article is correct please approve the pull request and merge it into the
-main branch.
+### Review Checklist
 
-# Running the site locally
-To run the site locally for testing purposes you need to install jekyll.
-Please follow the instructions from
-[Github](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll)
-on how to run to site locally.
+When reviewing articles, verify:
+
+- **Completeness**: Article covers the intended topic thoroughly
+- **Accuracy**: Technical information is correct
+- **Organization**: Proper category and directory placement
+- **Format**: Follows established structure and naming conventions
+- **Language**: Written in English with proper grammar
+- **Styling**: Adheres to Markdown guidelines
+- **Links**: All hyperlinks function correctly
+- **Media**: Images and other media files are properly linked
+
+### Approval Process
+
+**For Reviewers:**
+- Provide constructive feedback in PR comments for improvements needed
+- Approve and merge PRs that meet all requirements
+
+**For Authors:**
+- Address reviewer feedback promptly
+- Make requested changes before final approval
+
+## Local Development
+
+### Running the Site Locally
+
+To run the MkDocs site locally for testing:
+
+**Install MkDocs**
+```bash
+pip install -r requirements.txt
+```
+
+**Start the development server**
+```bash
+mkdocs serve
+```
+
+**View your site**
+Navigate to `http://localhost:8000` in your browser
+
+The site will automatically reload when you make changes to your documentation files.

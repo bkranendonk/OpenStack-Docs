@@ -1,0 +1,131 @@
+site_name: OpenStack Cloud Tutorials
+site_description: Step by Step OpenStack Tutorials
+site_author: CloudTutorials
+site_url: https://cloudtutorials.github.io/
+
+repo_name: CloudTutorials/OpenStack-Docs
+repo_url: https://github.com/CloudTutorials/OpenStack-Docs
+
+theme:
+  name: material
+  palette:
+    # Palette toggle for light mode
+    - scheme: default
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.code.copy
+    - content.code.select
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search:
+      lang: en
+  - minify:
+      minify_html: true
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+      emoji_index: !!python/name:materialx.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: cloudtutorials
+      repo: openstack-docs
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/CloudTutorials
+  analytics:
+    provider: google
+    property: !ENV GOOGLE_ANALYTICS_KEY
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Linux CLI: getting-started/using-the-cli-linux.md
+    - Windows CLI: getting-started/using-the-cli-windows.md
+  - Compute:
+    - Create Instances: compute/create-instances.md
+  - Network:
+    - Create Internal Network: network/create-an-internal-network.md
+    - Create BYOIP Network: network/create-byoip-network.md
+    - Create HA Firewall: network/create-ha-firewall.md
+  - Volume Storage:
+    - Create a Volume: volume/create-a-volume.md
+    - Create Volume Backup: volume/create-volume-backup.md
+    - Restore Volume Backup: volume/restore-volume-backup.md
+    - Resize Volume: volume/resize-volume.md
+    - Identify Volumes: volume/identify-volumes.md
+    - Volume Groups: volume/volume-groups.md
+  - Load Balancers:
+    - Introduction: loadbalancers/introduction-into-loadbalancer.md
+    - Create with Web Servers: loadbalancers/create-a-loadbalancer-with-webservers.md
+    - Create SSL Load Balancer: loadbalancers/create-a-ssl-loadbalancer.md
+    - Create Certbot SSL: loadbalancers/create-certbot-ssl-loadbalancer.md
+  - DNS:
+    - Create DNS Zone: dns/create-a-dns-zone.md
+    - Managing DNS Records: dns/managing-dns-records.md
+    - Managing Reverse DNS: dns/managing-reverse-dns.md
+  - Images:
+    - Community Images: image/community-images.md
+  - Key Manager:
+    - Introduction: keymanager/introduction-to-keymanager.md
+  - BOSS Backup:
+    - Update to v3.0.0: boss-backup/update-cloudvps-boss-to-v3.0.0.md
+
+copyright: Copyright &copy; 2023-2025 CloudTutorials
