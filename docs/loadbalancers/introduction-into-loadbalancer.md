@@ -139,6 +139,5 @@ use and manage for your cloud infrastructure.
 
 Now that you know everything you need to know about loadbalancers, you can
 start creating your own loadbalancer setup. We highly recommend to read the
-article about [creating a loadbalancer with webservers](
-loadbalancers/create-a-loadbalancer-with-webservers.md) to get
+article about [creating a loadbalancer with webservers](create-a-loadbalancer-with-webservers.md) to get
 started with OpenStack Octavia.

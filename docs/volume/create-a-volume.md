@@ -217,27 +217,27 @@ an error, please check the `/etc/fstab` file for any errors.
 **Step 1**  
 Right-click the windows logo in the left bottom corner and click
 on `Disk Management`.  
-![Open Disk Management](../../assets/images/2024-02-28-resize-volume/2024-02-28-open-diskmanagement.png)
+![Open Disk Management](../assets/images/2024-02-28-resize-volume/2024-02-28-open-diskmanagement.png)
 
 **Step 2**  
 Right click on the Disk you want to prepare and online the disk to be able
 to use the disk.  
-![Online Disk](../../assets/images/2024-03-01-create-a-volume.md/online_disk.png)
+![Online Disk](../assets/images/2024-03-01-create-a-volume.md/online_disk.png)
 
 **Step 3**  
 Right click on the Disk you want to prepare and click on `Initialize Disk`.  
-![Initialize Disk](../../assets/images/2024-03-01-create-a-volume.md/initialize_disk.png)
+![Initialize Disk](../assets/images/2024-03-01-create-a-volume.md/initialize_disk.png)
 
 **Step 4**  
 In the `Initialize Disk` window, select the disk you want to initialize, select
 the `GPT (GUID Partition Table)` and click on `OK`.  
-![Initialize Disk Wizard](../../assets/images/2024-03-01-create-a-volume.md/initialize_disk_wizard.png)
+![Initialize Disk Wizard](../assets/images/2024-03-01-create-a-volume.md/initialize_disk_wizard.png)
 
 **Step 5**  
 Right click on the unallocated space and click on `New Simple Volume`. You
 can just click on `Next` in the `New Simple Volume Wizard` to use the default
 settings. You can change the drive letter and the volume label if you want.  
-![New Simple Volume](../../assets/images/2024-03-01-create-a-volume.md/new_simple_volume.png)
+![New Simple Volume](../assets/images/2024-03-01-create-a-volume.md/new_simple_volume.png)
 
 Your disk is now ready to use, you can access it through Window Explorer and 
 use the disk to store you data.

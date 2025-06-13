@@ -15,7 +15,7 @@ The tutorial does not include configuring the firewall.
 
 
 ## Design
-![Design](../../assets/images/2023-12-20-create-ha-firewall/ha_fw_design.png)
+![Design](../assets/images/2023-12-20-create-ha-firewall/ha_fw_design.png)
 
 We have multiple firewall / router instances within the OpenStack project. 
 All routers have an internal IP, and an IP address on a public network. 
@@ -64,7 +64,7 @@ On the **Security Groups** tab:
 **Step 1** Go to compute > Instances > FW01 > Interfaces tab  
 **Step 2** Click on `Edit port` for the WAN interface  
 **Step 3** Deselect `Port Security` and click update  
-![Edit port](../../assets/images/2023-12-20-create-ha-firewall/edit_port.png)
+![Edit port](../assets/images/2023-12-20-create-ha-firewall/edit_port.png)
 **Step 4** Do the same for the LAN interface  
 **Step 5** Do the same for FW02
 
@@ -80,7 +80,7 @@ Install the firewall instances to your liking, but at least configure the follow
 * Go to network &gt; networks and navigate to network `internal-network`
 * Go to subnets and click `Edit subnet` for the subnet
 * Navigate to `Subnet Details`
-  * ![Configure host route](../../assets/images/2023-12-20-create-ha-firewall/configure_host_route.png)
+  * ![Configure host route](../assets/images/2023-12-20-create-ha-firewall/configure_host_route.png)
 * Add a host route `0.0.0.0/0,10.10.50.254` and click `Save`
 
 ## Validate the network

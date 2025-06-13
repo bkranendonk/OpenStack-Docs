@@ -1,7 +1,7 @@
 # Using the OpenStack CLI (Windows)
 
 For Linux installations please see
-[Using the OpenStack CLI (Linux)](getting-started/using-the-cli-linux.md)
+[Using the OpenStack CLI (Linux)](using-the-cli-linux.md)
 
 The OpenStack Command Line Interface (CLI) is a powerful tool for managing
 OpenStack resources. This guide will show you how to install the OpenStack CLI,
@@ -22,7 +22,7 @@ and distrubution. Below you will find the installation instructions for
 Windows.
 
 For Linux installations please see
-[Using the OpenStack CLI (Linux)](getting-started/using-the-cli-linux.md)
+[Using the OpenStack CLI (Linux)](using-the-cli-linux.md)
 
 ### Installing Microsoft Visual C++
 The OpenStack CLI is build with Python3 but it requires the Microsoft Visual

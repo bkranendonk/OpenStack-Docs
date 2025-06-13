@@ -1,7 +1,7 @@
 # Using the OpenStack CLI (Linux)
 
 For Windows installations please see
-[Using the OpenStack CLI (Windows)](getting-started/using-the-cli-windows.md).
+[Using the OpenStack CLI (Windows)](using-the-cli-windows.md).
 
 The OpenStack Command Line Interface (CLI) is a powerful tool for managing
 OpenStack resources. This guide will show you how to install the OpenStack CLI,
@@ -22,7 +22,7 @@ and distrubution. Below you will find the installation instructions for the
 most common Linux distributions.
 
 For Windows installations please see
-[Using the OpenStack CLI (Windows)](getting-started/using-the-cli-windows.md).
+[Using the OpenStack CLI (Windows)](using-the-cli-windows.md).
 
 [Instruction for Debian](#debian-10-11-12)  
 [Instruction for Ubuntu](#ubuntu-2004--2204)  
